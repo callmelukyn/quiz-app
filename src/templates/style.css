@@ -1,0 +1,192 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Cantarell:ital,wght@0,400;0,700;1,400;1,700&family=Lemon&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Cantarell", sans-serif;
+}
+
+html {
+  scrollbar-color: #2C639E #ffffff;
+  scroll-behavior: smooth;
+}
+
+/* Navigace */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background: #fafafa;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: linear-gradient(17deg,rgba(5, 4, 48, 1) 15%, rgba(34, 86, 199, 1) 53%, rgba(13, 185, 219, 1) 100%);
+}
+
+/* Položky menu */
+.nav-items {
+    display: flex;
+    gap: 15px;
+}
+
+.nav-item {
+    padding: 8px 14px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+}
+
+.nav-item:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+/* Tlačítko vpravo */
+.nav-button button {
+    background: linear-gradient(17deg,rgba(20, 66, 166, 1) 23%, rgba(61, 140, 224, 1) 71%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nav-button button:hover {
+    background: linear-gradient(17deg,rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    box-shadow: 0 4px 12px rgba(16, 51, 125, 0.3);
+    transform: scale(1.05);
+}
+
+/* Hero sekce */
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 600px;
+    background: #fafafa;
+    padding: 60px;
+}
+
+.hero h1 {
+    font-size: 6rem;
+    font-family: "Lemon", sans-serif;
+    background: linear-gradient(17deg,rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-family: "Cantarell", sans-serif;
+    font-size: 1.2rem;
+    color: #555;
+    font-weight: 500;
+    max-width: 600px;
+    margin-bottom: 40px;
+    line-height: 1.5;
+}
+
+.hero button {
+    font-family: "Cantarell", sans-serif;
+    background: linear-gradient(17deg,rgba(20, 66, 166, 1) 23%, rgba(61, 140, 224, 1) 71%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hero button:hover {
+    background: linear-gradient(17deg,rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    box-shadow: 0 4px 12px rgba(16, 51, 125, 0.3);
+    transform: scale(1.05);
+}
+
+/* SPLIT SECTIONS */
+.split-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 18%;
+    gap: 60px;
+    background: #fafafa;
+}
+
+/* Textová část */
+.split-text {
+    flex: 1;
+    font-family: "Cantarell", sans-serif;
+    padding-left: 20px;
+}
+
+.split-text h2 {
+    font-size: 2.5rem;
+    font-family: "Lemon", sans-serif;
+    background: linear-gradient(17deg, rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 30px;
+}
+
+.split-text p {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    max-width: 550px;
+}
+
+/* Obrázek */
+.split-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.split-image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.12);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.split-image img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+}
+
+@media (max-width: 900px) {
+    .split-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 40px;
+    }
+
+    .split-text, .split-image {
+        flex: none;
+        max-width: 100%;
+    }
+
+    .split-image img {
+        max-width: 80%;
+    }
+}

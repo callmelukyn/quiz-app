@@ -1,3 +1,4 @@
-fastapi[standard]
+fastapi
 uvicorn
 Flask==3.0.3
+python-dotenv
