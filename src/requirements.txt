@@ -1,2 +1,3 @@
 fastapi[standard]
 uvicorn
+Flask==3.0.3
