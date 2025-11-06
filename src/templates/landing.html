@@ -36,26 +36,23 @@
             <h2>What is Quizzer?</h2>
             <p>The Quizzer is an online platform designed for competitive quiz enthusiasts who love to test their knowledge and challenge others.</p>
             <p>Create your own quizzes or join thousands of others already made by the community.</p>
-            <p>Track your performance, earn achievements, and climb the leaderboard to prove your expertise.</p>
             <p>Our intuitive interface makes creating, sharing, and playing quizzes fun and effortless for everyone.</p>
             <p>Whether you’re a student, teacher, or just love trivia, The Quizzer is your arena for smart entertainment.</p>
         </div>
         <div class="split-image">
-            <img src="quiz-image.jpg" alt="About The Quizzer">
+            <img src="quiz.png" alt="About The Quizzer">
         </div>
     </div>
 
     <div class="split-section">
         <div class="split-image">
-            <img src="quiz-image.jpg" alt="About The Quizzer">
+            <img src="leaderboard.png" alt="About The Quizzer">
         </div>
         <div class="split-text">
-            <h2>What is Quizzer?</h2>
-            <p>The Quizzer is an online platform designed for competitive quiz enthusiasts who love to test their knowledge and challenge others.</p>
-            <p>Create your own quizzes or join thousands of others already made by the community.</p>
+            <h2>Reward yourself</h2>
+            <p>Other than getting more knowledge, you also be able to find completing quizzes rewarding.</p>
             <p>Track your performance, earn achievements, and climb the leaderboard to prove your expertise.</p>
-            <p>Our intuitive interface makes creating, sharing, and playing quizzes fun and effortless for everyone.</p>
-            <p>Whether you’re a student, teacher, or just love trivia, The Quizzer is your arena for smart entertainment.</p>
+            <p>Fight your friends on the global leaderboard and prove yourself worthy the placement.</p>
         </div>
     </div>
 
@@ -77,28 +74,28 @@
     <!-- OUR SPONSORS SECTION -->
 <div class="sponsors-section">
   <h2>Our Sponsors</h2>
-  <div class="sponsors-grid">
-    <div class="sponsor-box">
-      <img src="python-logo.png" alt="Sponsor 1">
-      <p>TechNova</p>
+      <div class="sponsors-grid">
+      <a class="sponsor-box" href="https://www.python.org/" target="_blank">
+        <img src="python-logo.png" alt="Python logo">
+        <p>Python</p>
+      </a>
+      <a class="sponsor-box" href="https://fastapi.tiangolo.com/" target="_blank">
+        <img src="fastapi.svg" alt="FastAPI logo">
+        <p>FastAPI</p>
+      </a>
+      <a class="sponsor-box" href="https://flask.palletsprojects.com/en/stable/" target="_blank">
+        <img src="flask.png" alt="Flask logo">
+        <p>Flask</p>
+      </a>
+      <a class="sponsor-box" href="https://sqlite.org/" target="_blank">
+        <img src="sqlite.png" alt="SQLite logo">
+        <p>SQLite</p>
+      </a>
+      <a class="sponsor-box" href="https://pef.mendelu.cz/" target="_blank">
+        <img src="Mendelu_PEF.jpg" alt="PEF logo">
+        <p>MENDELU PEF</p>
+      </a>
     </div>
-    <div class="sponsor-box">
-      <img src="python-logo.png" alt="Sponsor 2">
-      <p>QuizPro</p>
-    </div>
-    <div class="sponsor-box">
-      <img src="python-logo.png" alt="Sponsor 3">
-      <p>SmartZone</p>
-    </div>
-    <div class="sponsor-box">
-      <img src="python-logo.png" alt="Sponsor 4">
-      <p>Brainly</p>
-    </div>
-    <div class="sponsor-box">
-      <img src="python-logo.png" alt="Sponsor 5">
-      <p>InfoEdge</p>
-    </div>
-  </div>
 </div>
 
 
@@ -138,6 +135,17 @@
     }
   });
   observer.observe(section);
+
+  // Sticky navbar effect
+const navbar = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 100) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
 </script>
 </body>
 </html>
