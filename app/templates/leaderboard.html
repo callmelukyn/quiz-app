@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="icon" href="../static/img/favicon.ico">
+    <title>Quizzer - Create, compete, enjoy</title>
+</head>
+<body>
+    <div class="nav">
+        <div>
+            <a class="nav-logo" href="/">
+                <img src="../static/img/favicon.ico">
+            </a>
+        </div>
+
+        <div class="nav-items">
+            <a class="nav-item" href="/">Quizzes</a>
+            <a class="nav-item" href="/leaderboard">Leaderboard</a>
+            <a class="nav-item" href="/aboutus">About us</a>
+        </div>
+
+        <div class="nav-button">
+            <a class="nav-btn" href="/auth/login">DASHBOARD</a>
+        </div>
+    </div>
+
+    <div class="leaderboard-hero">
+        <h1>🏆Leaderboard</h1>
+    </div>
+
+{% block content %}
+
+<div class="leaderboard-container">
+    <table class="leaderboard-table">
+        <thead>
+            <tr>
+                <th>Placement</th>
+                <th>Nickname</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+                    {% for p in players %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ p["full_name"] }}</td>
+                <td>{{ p["score"] }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">Zatím žádní hráči se skóre 😢</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+
+    <div class="footer">
+      <img src="../static/img/favicon.ico" alt="Logo">
+      <p><a href="https://lukynweb.onrender.com/">LUKYN</a> | Made with ❤️ in Znojmo</p>
+    </div>
+
+<script>
+  // Sticky navbar effect
+const navbar = document.querySelector('.nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 100) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+</script>
+</body>
+</html>

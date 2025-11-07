@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="dashboard">
+    <h2>Vítej, {{ user["email"] }}</h2>
+    <p>Tvoje role: {{ ", ".join(user["roles"]) }}</p>
+
+    <h3>📋 Tvoje kvízy</h3>
+    <ul>
+        {% for q in quizzes %}
+        <li>{{ q["title"] }}</li>
+        {% else %}
+        <li>Žádné kvízy zatím nemáš.</li>
+        {% endfor %}
+    </ul>
+
+    <hr>
+    <h3>➕ Vytvoř nový kvíz</h3>
+    <form id="quizForm">
+        <label for="title">Název kvízu:</label>
+        <input type="text" id="title" name="title" required>
+        <button type="button" onclick="addQuestion()">Přidat otázku</button>
+        <div id="questions"></div>
+        <button type="submit">Uložit kvíz</button>
+    </form>
+</div>
+
+<script>
+let questionCount = 0;
+
+function addQuestion() {
+    const div = document.createElement("div");
+    div.classList.add("question");
+    div.innerHTML = `
+        <h4>Otázka ${++questionCount}</h4>
+        <input type="text" name="question_${questionCount}_text" placeholder="Text otázky" required><br>
+        ${Array.from({length: 4}).map((_, i) => `
+            <input type="text" name="question_${questionCount}_answer_${i}" placeholder="Odpověď ${i+1}" required>
+            <input type="radio" name="question_${questionCount}_correct" value="${i}" ${i===0?"checked":""}> správná<br>
+        `).join("")}
+        <hr>
+    `;
+    document.getElementById("questions").appendChild(div);
+}
+
+document.getElementById("quizForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const title = formData.get("title");
+
+    const questions = [];
+    for (let q = 1; q <= questionCount; q++) {
+        const text = formData.get(`question_${q}_text`);
+        const answers = [
+            formData.get(`question_${q}_answer_0`),
+            formData.get(`question_${q}_answer_1`),
+            formData.get(`question_${q}_answer_2`),
+            formData.get(`question_${q}_answer_3`)
+        ];
+        const correct = Number(formData.get(`question_${q}_correct`));
+        questions.push({text, answers, correct_index: correct});
+    }
+
+    const res = await fetch("/quizzes/create", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({title, questions})
+    });
+    if (res.ok) alert("Kvíz uložen!");
+});
+</script>
+{% endblock %}

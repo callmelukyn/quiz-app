@@ -1,0 +1,518 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Cantarell:ital,wght@0,400;0,700;1,400;1,700&family=Lemon&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Cantarell", sans-serif;
+}
+
+html {
+  scrollbar-color: #2C639E #ffffff;
+  scroll-behavior: smooth;
+}
+
+/* Navigace */
+.nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 80px;
+    background: rgba(250, 250, 250, 0.85);
+    backdrop-filter: blur(10px);
+    transition: background 0.4s ease, box-shadow 0.4s ease, backdrop-filter 0.4s ease;
+    box-sizing: border-box;
+    z-index: 1000;
+}
+.nav.scrolled {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(20px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.nav-logo {
+    flex: 0 0 auto;
+}
+
+/* Položky menu */
+.nav-items {
+    display: flex;
+    gap: 15px;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-item {
+    padding: 8px 14px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    color: #333;
+    font-weight: 500;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.nav-item:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+
+}
+
+.nav-item a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+}
+.nav-button {
+    display: flex;
+    flex: 0 0 auto;
+    align-items: center;
+}
+
+.nav-button button {
+    background: linear-gradient(17deg,rgba(20, 66, 166, 1) 23%, rgba(61, 140, 224, 1) 71%);
+    color: white;
+    font-family: "Cantarell", sans-serif;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nav-btn {
+    display: inline-block;
+    background: linear-gradient(17deg, rgba(20, 66, 166, 1) 23%, rgba(61, 140, 224, 1) 71%);
+    color: white;
+    font-family: "Cantarell", sans-serif;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    text-align: center;
+}
+
+.nav-btn:hover {
+    background: linear-gradient(17deg, rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    box-shadow: 0 4px 12px rgba(16, 51, 125, 0.3);
+    transform: scale(1.05);
+}
+
+button a{
+    display: block;
+    text-decoration: none;
+    color: white;
+    font-family: "Cantarell", sans-serif;
+}
+
+.nav-button button:hover {
+    background: linear-gradient(17deg,rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    box-shadow: 0 4px 12px rgba(16, 51, 125, 0.3);
+    transform: scale(1.05);
+}
+
+/* Hero sekce */
+.hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 600px;
+    background: #fafafa;
+    padding: 60px;
+}
+
+.hero h1 {
+    font-size: 6rem;
+    font-family: "Lemon", sans-serif;
+    background: linear-gradient(17deg,rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 30px;
+}
+
+.hero p {
+    font-family: "Cantarell", sans-serif;
+    font-size: 1.2rem;
+    color: #555;
+    font-weight: 500;
+    max-width: 600px;
+    margin-bottom: 40px;
+    line-height: 1.5;
+}
+
+.hero span{
+    font-family: "Lemon", sans-serif;
+    letter-spacing: 2px;
+}
+.hero button {
+    font-family: "Cantarell", sans-serif;
+    background: linear-gradient(17deg,rgba(20, 66, 166, 1) 23%, rgba(61, 140, 224, 1) 71%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 14px 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.hero button:hover {
+    background: linear-gradient(17deg,rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    box-shadow: 0 4px 12px rgba(16, 51, 125, 0.3);
+    transform: scale(1.05);
+}
+
+.hero-btn {
+    display: inline-block;
+    background: linear-gradient(17deg, rgba(20, 66, 166, 1) 23%, rgba(61, 140, 224, 1) 71%);
+    color: white;
+    border-radius: 10px;
+    padding: 14px 30px;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    text-align: center;
+}
+
+.hero-btn:hover {
+    background: linear-gradient(17deg, rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    box-shadow: 0 4px 12px rgba(16, 51, 125, 0.3);
+    transform: scale(1.05);
+}
+
+.hero-btn span {
+    font-family: "Lemon", sans-serif;
+    letter-spacing: 2px;
+}
+
+/* SPLIT SECTIONS */
+.split-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 100px 18%;
+    gap: 60px;
+    background: #fafafa;
+}
+
+/* Textová část */
+.split-text {
+    flex: 1;
+    font-family: "Cantarell", sans-serif;
+    padding-left: 20px;
+}
+
+.split-text h2 {
+    font-size: 2.5rem;
+    font-family: "Lemon", sans-serif;
+    background: linear-gradient(17deg, rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 30px;
+}
+
+.split-text p {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    max-width: 550px;
+}
+
+/* Obrázek */
+.split-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.split-image img {
+    width: 100%;
+    max-width: 500px;
+    border-radius: 60px;
+    box-shadow: 10px 10px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.split-image img:hover {
+    transform: scale(1.006);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 900px) {
+    .split-section {
+        flex-direction: column;
+        text-align: center;
+        padding: 60px 40px;
+    }
+
+    .split-text, .split-image {
+        flex: none;
+        max-width: 100%;
+    }
+
+    .split-image img {
+        max-width: 80%;
+    }
+}
+
+/* STATS SECTION */
+.stats-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;
+    background: #fafafa;
+    padding: 100px 60px;
+    text-align: center;
+}
+
+.stat-box {
+    flex: 1;
+    max-width: 250px;
+}
+
+.stat-number {
+    font-size: 3rem;
+    font-family: "Lemon", sans-serif;
+    background: linear-gradient(17deg, rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+}
+
+.stat-box p {
+    font-size: 1.1rem;
+    color: #555;
+    font-weight: 500;
+}
+
+/* OUR SPONSORS SECTION */
+.sponsors-section {
+    background: #fafafa;
+    text-align: center;
+    padding: 100px 60px;
+}
+
+.sponsors-section h2 {
+    font-family: "Lemon", sans-serif;
+    font-size: 2.5rem;
+    background: linear-gradient(17deg, rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 60px;
+}
+
+.sponsors-grid {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+
+.sponsor-box {
+    display: inline-block;
+    text-align: center;
+    max-width: 200px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none;
+}
+
+.sponsor-box img {
+    width: 150px;
+    height: 150px;
+    object-fit: contain;
+    border-radius: 20px;
+    box-shadow: 5px 5px 5px rgba(0,0,0,0.05);
+    background: white;
+    padding: 10px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.sponsor-box:hover img {
+    transform: scale(1.01);
+    box-shadow: 7px 7px 7px rgba(0,0,0,0.1);
+}
+
+.sponsor-box p {
+    font-family: "Cantarell", sans-serif;
+    font-size: 1rem;
+    color: #555;
+    margin-top: 12px;
+    text-decoration: none;
+}
+
+/* FOOTER */
+.footer {
+    border-top: 1px solid #eaeaea;
+    background: #fafafa;
+    text-align: center;
+    padding: 40px 0;
+}
+
+.footer img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px;
+}
+
+.footer p {
+    font-family: "Cantarell", sans-serif;
+    color: #555;
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.footer a {
+    font-family: "Lemon", sans-serif;
+    color: #555;
+    font-size: 0.95rem;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* LEADERBOARD */
+.leaderboard-hero{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 200px;
+    background: #fafafa;
+    padding: 60px;
+}
+
+.leaderboard-hero h1 {
+    font-size: 6rem;
+    font-family: "Lemon", sans-serif;
+    background: linear-gradient(17deg,rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 30px;
+}
+
+.leaderboard-container {
+    max-width: 700px;
+    margin: 2rem auto;
+    text-align: center;
+}
+.leaderboard-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+.leaderboard-table th, .leaderboard-table td {
+    border: 1px solid #ddd;
+    padding: 0.6rem;
+}
+.leaderboard-table th {
+    background-color: #0078d4;
+    color: white;
+}
+
+/* LOGIN */
+.form-background{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/blurry_blue_bg.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: blur(8px);
+    z-index: -1;
+}
+
+.form-wrapper{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    max-width: 450px;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+}
+
+.form-container {
+    backdrop-filter: blur(15px);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 25px;
+    padding: 50px 40px;
+    width: 400px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.form-container h2 {
+    font-family: "Lemon", sans-serif;
+    font-size: 2.5rem;
+    background: linear-gradient(17deg, rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 30px;
+}
+
+.form-container input {
+    width: 100%;
+    padding: 12px 15px;
+    margin: 10px 0;
+    border-radius: 15px;
+    border: none;
+    outline: none;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.form-container input::placeholder {
+    color: #555;
+}
+
+.form-container button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 15px;
+    font-size: 1rem;
+    color: white;
+    cursor: pointer;
+    background: linear-gradient(17deg, rgba(20, 66, 166, 1) 23%, rgba(61, 140, 224, 1) 71%);
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-container button:hover {
+    background: linear-gradient(17deg, rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    box-shadow: 0 4px 12px rgba(16, 51, 125, 0.3);
+    transform: scale(1.05);
+}
+
+.form-footer {
+    margin-top: 15px;
+    font-family: "Cantarell", sans-serif;
+    color: #333;
+}
+
+.form-footer a {
+    color: #2c639e;
+    text-decoration: none;
+    font-weight: 500;
+}
