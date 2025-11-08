@@ -16,3 +16,8 @@ Nez se user dostane na /dashboard, je treba projít pres /auth/{register/login}.
 Auth by mel vzdy nejak overit token nez da redirect na /dashboard.
 A nebo to funguje tak - ze ja si getnu /dashboard a ten dashboard musí hodit neco s authem ?
 Protoze jinak bych mohl obejit auth tim ze napisu /dashboard.
+
+
+Kontaktni formular, admin muze odpovidat na dotaz. nekde v dashobarDu uvidi tickety
+
+Admin muze menit role uživatelů, podle ID asi
