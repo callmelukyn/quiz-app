@@ -15,7 +15,7 @@
         </div>
 
         <div class="nav-items">
-            <a class="nav-item" href="/">Quizzes</a>
+            <a class="nav-item" href="/dashboard/quizzes">Quizzes</a>
             <a class="nav-item" href="/leaderboard">Leaderboard</a>
             <a class="nav-item" href="/aboutus">About us</a>
         </div>
@@ -44,12 +44,12 @@
                     {% for p in players %}
             <tr>
                 <td>{{ loop.index }}</td>
-                <td>{{ p["full_name"] }}</td>
+                <td>{{ p["nickname"] }}</td>
                 <td>{{ p["score"] }}</td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">Zatím žádní hráči se skóre 😢</td>
+                <td colspan="4">So far no players 😢</td>
             </tr>
             {% endfor %}
         </tbody>
