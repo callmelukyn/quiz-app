@@ -1,0 +1,18 @@
+MY PROFILE tlacitko zmenit asi na avatar, nick a body -we ll see
+Tlačítko v dashboardu se mění podle toho kde jsi
+Zahashovat hesla z registrace a pak nějak odhashovat při loginu
+
+
+:8000/player/{id z users} na zobrazeni profilu
+(asi idealne bez dashboardu zobrazeni hráče, proklikem z tabulky)
+
+dashboard/quiz/{id kvizu}
+(tady pokud se jedna o cizi kviz, tak hraju, pokud je to muj tak mam moznosti mazat a edit)
+
+napadlo me i player/{id hrace/nebo mozna unikatni nickname?}/{id kvizu}
+tohle by mohli byt ty prokliky na samotné kvízy taky.
+
+Nez se user dostane na /dashboard, je treba projít pres /auth/{register/login}.
+Auth by mel vzdy nejak overit token nez da redirect na /dashboard.
+A nebo to funguje tak - ze ja si getnu /dashboard a ten dashboard musí hodit neco s authem ?
+Protoze jinak bych mohl obejit auth tim ze napisu /dashboard.
