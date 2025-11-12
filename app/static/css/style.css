@@ -1,13 +1,14 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Cantarell:ital,wght@0,400;0,700;1,400;1,700&family=Lemon&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 body {
+    background: #fafafa;
     margin: 0;
     padding: 0;
     font-family: "Cantarell", sans-serif;
 }
 
 html {
-  scrollbar-color: #2C639E #ffffff;
+  scrollbar-color: #2C639E #fafafa;
   scroll-behavior: smooth;
 }
 
@@ -403,6 +404,11 @@ button a{
     margin-bottom: 30px;
 }
 
+.leaderboard-hero a{
+    text-decoration: none;
+    color: transparent;
+}
+
 .leaderboard-container {
     max-width: 700px;
     margin: 2rem auto;
@@ -520,6 +526,7 @@ button a{
 /* DASHBOARD */
 
 .dashboard-buttons-wrapper {
+    background: #fafafa;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -551,6 +558,7 @@ button a{
 /* QUIZ CARDS*/
 
 .quiz-section-container{
+    background: #fafafa;
     max-width: 1300px;
     margin: 3rem auto;
     padding: 0 20px;

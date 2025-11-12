@@ -3,7 +3,7 @@
 
 <div class="quiz-section-container">
     <div class="quiz-card-grid">
-        {% for q in quizzes %}
+        {% for q in quiz %}
         <a href="/quizzes/{{ q[4] }}" class="quiz-card-link">
             <div class="quiz-card">
                 <img src="{{ url_for('quiz_img', path=q[0].split('quiz_img/')[-1]) }}"
