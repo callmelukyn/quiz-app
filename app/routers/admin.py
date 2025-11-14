@@ -21,6 +21,11 @@ def update_points(user_id: int, score: dict):
     admin_svc.edit_points(user_id, int(score["score"]))
     return {"status": "ok"}
 
+@router.post("/promote-user/{user_id}")
+def promote_user(user_id: int):
+    admin_svc.promote_user(user_id)
+    return {"status": "ok"}
+
 @router.delete("/delete-user/{user_id}")
 def remove_user(user_id: int):
     admin_svc.delete_user(user_id)

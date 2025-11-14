@@ -39,6 +39,7 @@ function openUserPopup(user) {
 
     document.getElementById("saveScoreBtn").onclick = () => updateScore(user.id);
     document.getElementById("deleteUserBtn").onclick = () => deleteUser(user.id);
+    document.getElementById("promoteUserBtn").onclick = () => promoteUser(user.id);
 }
 
 closeBtn.onclick = () => popup.classList.add("hidden");
@@ -54,6 +55,15 @@ async function updateScore(id) {
     });
 
     showNotify("✅ Updated!", "Score has been successfully updated.");
+    popup.classList.add("hidden");
+}
+
+async function promoteUser(id) {
+    await fetch(`/admin/promote-user/${id}`, {
+        method: "POST"
+    });
+
+    showNotify("🗑️ Promoted", "User has been successfully promoted to moderator.");
     popup.classList.add("hidden");
 }
 

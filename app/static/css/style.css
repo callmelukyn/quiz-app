@@ -998,6 +998,8 @@ button a{
     font-size: 1rem;
     font-family: "Cantarell", sans-serif;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+    z-index: 50;
 }
 
 /* zelené tlačítko */
@@ -1009,6 +1011,18 @@ button a{
 .btn-save:hover {
     background: linear-gradient(17deg, #16753e 23%, #1f9b55 71%);
     box-shadow: 0 4px 12px rgba(23, 98, 55, 0.3);
+    transform: scale(1.05);
+}
+
+/* modré tlačítko */
+.btn-promote {
+    background: linear-gradient(17deg, rgba(20, 66, 166, 1) 23%, rgba(61, 140, 224, 1) 71%);
+    color: white;
+}
+
+.btn-promote:hover {
+    background: linear-gradient(17deg, rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    box-shadow: 0 4px 12px rgba(16, 51, 125, 0.3);
     transform: scale(1.05);
 }
 

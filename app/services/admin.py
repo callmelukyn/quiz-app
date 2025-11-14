@@ -22,6 +22,11 @@ def search_users(q: str = ""):
         """, (q,)).fetchall()
     return rows
 
+def promote_user(user_id: int):
+    with get_conn() as c:
+        c.execute("UPDATE users SET role_id = 1 WHERE id = ?", (user_id,))
+        c.commit()
+
 def delete_user(user_id: int):
     with get_conn() as c:
         c.execute("DELETE FROM users WHERE id = ?", (user_id,))

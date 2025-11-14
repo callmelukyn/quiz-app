@@ -4,7 +4,7 @@
 
 <div class="admin-container">
     <h2>User management</h2>
-    <input id="userSearch" type="text" placeholder="Search nickname..." class="search-input">
+    <input id="userSearch" type="text" autocomplete="off" placeholder="Search nickname..." class="search-input">
     <div id="results" class="results-box"></div>
 </div>
 
@@ -20,6 +20,7 @@
         <input id="newScore" type="number" min="0">
         <div class="btn-group">
             <button id="saveScoreBtn" class="btn-save">Save</button>
+            <button id="promoteUserBtn" class="btn-promote">Make mod</button>
             <button id="deleteUserBtn" class="btn-delete">Delete account</button>
         </div>
     </div>
