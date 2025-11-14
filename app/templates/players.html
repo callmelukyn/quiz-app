@@ -8,23 +8,23 @@
 </head>
 <body>
     {% include "nav-bar.html" %}
-
+    {% block content %}
     <div class="leaderboard-hero">
-        <h1>About us</h1>
+        <h1>{{ player[0] }}</h1>
     </div>
 
     <div class="split-section">
         <div class="split-text">
-            <h2>Who is behind it?</h2>
-            <p>My name is Lucas and this is just my school project.</p>
-            <p>I have had this idea for a while but never got a chance to really do it. If there was only more time and more people, this project could be finished and new community would see the sunlight.</p>
-            <p>This project could just be the beggining of something bigger, you never know. 😉</p>
-            <p>Anyways, thank you Dr. Turčínek and Mr. Pisařovic for the opportunity to try out making backend application, it was fun making (It took more than 40 hours, syllabus is wrong 😭).</p>
+            <h2>{{ player[0] }}</h2>
+            <p>Score: {{ player[1] }}</p>
+            <p>Position: {{ player[2] }}</p>
+            <p>Role: {{ player[3] }}</p>
         </div>
         <div class="split-image">
             <img src="../static/img/quiz.png" alt="About The Quizzer">
         </div>
     </div>
+{% endblock %}
 
     {% include "footer.html" %}
 

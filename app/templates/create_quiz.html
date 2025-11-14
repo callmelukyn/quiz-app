@@ -1,0 +1,25 @@
+{% extends "dashboard.html" %}
+{% block content %}
+
+<link rel="stylesheet" href="../static/css/style.css">
+<div class="quiz-create-container">
+    <h2 class="create-title">Create New Quiz</h2>
+    <form id="quizForm" method="POST" enctype="multipart/form-data">
+        <input type="text" id="title" class="input-field" placeholder="Quiz title" required>
+        <textarea id="description" class="input-field textarea-field" placeholder="Quiz description" required></textarea>
+        <div class="image-upload-box" id="dropArea">
+            <p>Drop image here or click to upload</p>
+            <input type="file" name="image" id="imageInput" accept="image/*" hidden>
+            <img id="previewImage" style="display:none;">
+        </div>
+        <div id="questions"></div>
+        <div class="quiz-create-buttons">
+            <button type="button" class="btn-primary" onclick="addQuestion()">+ Add Question</button>
+            <button type="button" class="btn-green" onclick="submitQuiz()">Create Quiz</button>
+        </div>
+        <input type="hidden" name="data" id="dataField">
+    </form>
+</div>
+
+<script src="{{ url_for('static', path='/js/quiz-creation.js') }}"></script>
+{% endblock content %}

@@ -22,3 +22,9 @@ Protoze jinak bych mohl obejit auth tim ze napisu /dashboard.
 Kontaktni formular, admin muze odpovidat na dotaz. nekde v dashobarDu uvidi tickety
 
 Admin muze menit role uživatelů, podle ID asi
+
+
+UDELAT UNIKATNI EMAILY A NICKNAMES DO DB PRES LOGIN/rEGISTER, at muze byt players/lukyn
+
+
+Po smazani kvizu/uzivatele s kvizama atd tak se nesmazou fotky z galerie

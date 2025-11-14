@@ -26,15 +26,6 @@ def init_db():
         );
         """)
 
-        # Vazební tabulka mezi uživateli a rolemi
-        # c.execute("""
-        # CREATE TABLE IF NOT EXISTS user_roles (
-        #     user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-        #     role_id INTEGER REFERENCES roles(id) ON DELETE CASCADE,
-        #     PRIMARY KEY (user_id, role_id)
-        # );
-        # """)
-
         # Kvízy
         c.execute("""
         CREATE TABLE IF NOT EXISTS quizzes (
@@ -43,38 +34,37 @@ def init_db():
             description TEXT NOT NULL,
             image_path TEXT DEFAULT 'database/quiz_img/default.png',
             user_id INTEGER REFERENCES users(id) ON DELETE CASCADE
-        );
-        """)
+         )""")
 
-        # Otázky
-    #     c.execute("""
-        #    CREATE TABLE IF NOT EXISTS questions (
-        #        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        #        quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
-        #        text TEXT NOT NULL
-        #    );
-        #    """)
+         #Otázky
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS questions (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
+                text TEXT NOT NULL
+            );
+            """)
 
         # Odpovědi
-        #    c.execute("""
-        #    CREATE TABLE IF NOT EXISTS answers (
-        #        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        #        question_id INTEGER REFERENCES questions(id) ON DELETE CASCADE,
-        #        text TEXT NOT NULL,
-        #        is_correct INTEGER NOT NULL DEFAULT 0
-        #    );
-        #    """)
+        c.execute("""
+            CREATE TABLE IF NOT EXISTS answers (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                question_id INTEGER REFERENCES questions(id) ON DELETE CASCADE,
+                text TEXT NOT NULL,
+                is_correct INTEGER NOT NULL DEFAULT 0
+            );
+            """)
 
         # Výsledky hraní kvízu (volitelné pro rozšíření)
-        #   c.execute("""
-      #  CREATE TABLE IF NOT EXISTS quiz_results (
-        #        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        #       user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-        #       quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
-        #       score INTEGER DEFAULT 0,
-        #       completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        #   );
-        #   """)
+        c.execute("""
+        CREATE TABLE IF NOT EXISTS quiz_results (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+               user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+               quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
+               score INTEGER DEFAULT 0,
+               completed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+           );
+           """)
 
         c.commit()
 

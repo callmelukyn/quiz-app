@@ -1,7 +1,7 @@
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from app.routers import leaderboard, aboutus, auth, dashboard, quizzes
+from app.routers import leaderboard, aboutus, auth, dashboard, quizzes, players, admin
 
 app = FastAPI(title="Quizzer")
 
@@ -14,8 +14,9 @@ app.include_router(leaderboard.router, prefix="/leaderboard", tags=["leaderboard
 app.include_router(aboutus.router, prefix="/aboutus", tags=["aboutus"])
 app.include_router(auth.router, prefix="/auth", tags=["auth"])
 app.include_router(dashboard.router, prefix="/dashboard", tags=["dashboard"])
-
 app.include_router(quizzes.router, prefix="/quizzes", tags=["quizzes"])
+app.include_router(players.router, prefix="/players", tags=["players"])
+app.include_router(admin.router, prefix="/admin", tags=["admin"])
 @app.get("/")
 def landing(request: Request):
     return templates.TemplateResponse("landing.html", {"request": request})

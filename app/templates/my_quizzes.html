@@ -1,8 +1,32 @@
 {% extends "dashboard.html" %}
 {% block content %}
 
-<div class="leaderboard-container">
-
+<div class="quiz-section-container">
+    <div class="quiz-card-grid">
+        {% for q in quizzes %}
+        <a href="/quizzes/{{ q[4] }}" class="quiz-card-link">
+            <div class="quiz-card">
+                <img src="{{ url_for('quiz_img', path=q[0].split('quiz_img/')[-1]) }}"
+                     alt="Quiz image"
+                     class="quiz-card-image">
+                <div class="quiz-card-content">
+                    <h3 class="quiz-card-title">{{ q[1] }}</h3>
+                    <p class="quiz-card-description">{{ q[2] }}</p>
+                    <p class="quiz-card-author">Author: {{ q[3] }}</p>
+                </div>
+            </div>
+        </a>
+        {% else %}
+        <p class="no-quizzes">No quizzes have been created yet 😢</p>
+        {% endfor %}
+        <a href="/quizzes/create" class="quiz-card-link">
+            <div class="quiz-card">
+                <div class="quiz-card-content">
+                    <h3 class="quiz-card-add">+ CREATE NEW</h3>
+                </div>
+            </div>
+        </a>
+    </div>
 </div>
 
 {% endblock %}

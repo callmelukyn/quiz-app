@@ -2,28 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="icon" href="../static/img/favicon.ico">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', path='/img/favicon.ico') }}">
     <title>Quizzer - Create, compete, enjoy</title>
 </head>
 <body>
-    <div class="nav">
-        <div>
-            <a class="nav-logo" href="/">
-                <img src="../static/img/favicon.ico">
-            </a>
-        </div>
-
-        <div class="nav-items">
-            <a class="nav-item" href="/quizzes">Quizzes</a>
-            <a class="nav-item" href="/leaderboard">Leaderboard</a>
-            <a class="nav-item" href="/aboutus">About us</a>
-        </div>
-
-        <div class="nav-button">
-            <a class="nav-btn" href="/dashboard">DASHBOARD</a>
-        </div>
-    </div>
+    {% include "nav-bar.html" %}
 
     <div class="hero">
         <h1>Quizzer</h1>
@@ -97,55 +81,9 @@
       </a>
     </div>
 </div>
+    {% include "footer.html" %}
 
-
-    <div class="footer">
-      <img src="../static/img/favicon.ico" alt="Logo">
-      <p><a href="https://lukynweb.onrender.com/">LUKYN</a> | Made with ❤️ in Znojmo</p>
-    </div>
-
-<script>
-    // JS for counting animation
-  const counters = document.querySelectorAll('.stat-number');
-  const speed = 60; // nižší = rychlejší
-
-  const animateCounters = () => {
-    counters.forEach(counter => {
-      const updateCount = () => {
-        const target = +counter.getAttribute('data-target');
-        const count = +counter.innerText;
-        const increment = Math.ceil(target / speed);
-
-        if (count < target) {
-          counter.innerText = count + increment;
-          setTimeout(updateCount, 20);
-        } else {
-          counter.innerText = target.toLocaleString();
-        }
-      };
-      updateCount();
-    });
-  };
-
-  const section = document.querySelector('.stats-section');
-  const observer = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting) {
-      animateCounters();
-      observer.disconnect();
-    }
-  });
-  observer.observe(section);
-
-  // Sticky navbar effect
-const navbar = document.querySelector('.nav');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 100) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
-});
-
-</script>
+<script src="{{ url_for('static', path='/js/sticky-nav.js') }}"></script>
+<script src="{{ url_for('static', path='/js/counting-animation.js') }}"></script>
 </body>
 </html>

@@ -2,28 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="icon" href="../static/img/favicon.ico">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', path='/img/favicon.ico') }}">
     <title>Quizzer - Create, compete, enjoy</title>
 </head>
 <body>
-    <div class="nav">
-        <div>
-            <a class="nav-logo" href="/">
-                <img src="../static/img/favicon.ico">
-            </a>
-        </div>
-
-        <div class="nav-items">
-            <a class="nav-item" href="/quizzes">Quizzes</a>
-            <a class="nav-item" href="/leaderboard">Leaderboard</a>
-            <a class="nav-item" href="/aboutus">About us</a>
-        </div>
-
-        <div class="nav-button">
-            <a class="nav-btn" href="/dashboard">DASHBOARD</a>
-        </div>
-    </div>
+    {% include "nav-bar.html" %}
 
     <div class="leaderboard-hero">
         <h1>🏆Leaderboard</h1>
@@ -43,8 +27,12 @@
         <tbody>
                     {% for p in players %}
             <tr>
+                {% if loop.index == 1 %}
+                <td>🏆{{ loop.index }}</td>
+                {% else %}
                 <td>{{ loop.index }}</td>
-                <td>{{ p["nickname"] }}</td>
+                {% endif %}
+                <td><a href="/players/{{p["id"]}}"target="_blank">{{ p["nickname"] }}</a></td>
                 <td>{{ p["score"] }}</td>
             </tr>
         {% else %}
@@ -55,23 +43,11 @@
         </tbody>
     </table>
 </div>
+
 {% endblock %}
 
-    <div class="footer">
-      <img src="../static/img/favicon.ico" alt="Logo">
-      <p><a href="https://lukynweb.onrender.com/">LUKYN</a> | Made with ❤️ in Znojmo</p>
-    </div>
+    {% include "footer.html" %}
 
-<script>
-  // Sticky navbar effect
-const navbar = document.querySelector('.nav');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 100) {
-    navbar.classList.add('scrolled');
-  } else {
-    navbar.classList.remove('scrolled');
-  }
-});
-</script>
+<script src="{{ url_for('static', path='/js/sticky-nav.js') }}"></script>
 </body>
 </html>
