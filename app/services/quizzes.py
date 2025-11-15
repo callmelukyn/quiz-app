@@ -1,3 +1,5 @@
+from fastapi import UploadFile
+
 from app.database.database import get_conn
 import json,uuid
 
@@ -53,7 +55,7 @@ def get_mine_quizzes(id: int):
 
 ##Vytvoreni kvizu
 
-def save_image(image):
+def save_image(image: UploadFile | None):
     """
     Uloží obrázek do složky a vrátí final path.
     """
@@ -63,12 +65,13 @@ def save_image(image):
     filename = f"{uuid.uuid4()}_{image.filename}"
     save_path = f"app/database/quiz_img/{filename}"
 
+    # image.file je SpooledTemporaryFile
     with open(save_path, "wb") as f:
-        f.write(image)
+        f.write(image.file.read())
 
     return f"database/quiz_img/{filename}"
 
-def create_quiz(payload: dict, image_bytes: bytes | None, user_id: int = 1):
+def create_quiz(payload: dict, image: UploadFile | None, user_id: int = 1):
     """
     Uloží kvíz + otázky + odpovědi.
     """
@@ -77,7 +80,7 @@ def create_quiz(payload: dict, image_bytes: bytes | None, user_id: int = 1):
     questions = payload["questions"]
 
     # Obrázek
-    image_path = save_image(image_bytes)
+    image_path = save_image(image)
 
     with get_conn() as c:
         cursor = c.execute(

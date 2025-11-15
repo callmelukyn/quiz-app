@@ -26,6 +26,11 @@ def promote_user(user_id: int):
     admin_svc.promote_user(user_id)
     return {"status": "ok"}
 
+@router.post("/demote-user/{user_id}")
+def demote_user(user_id: int):
+    admin_svc.demote_user(user_id)
+    return {"status": "ok"}
+
 @router.delete("/delete-user/{user_id}")
 def remove_user(user_id: int):
     admin_svc.delete_user(user_id)

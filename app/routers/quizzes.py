@@ -30,13 +30,10 @@ async def post_quiz_form(
 
     payload = json.loads(data)
 
-    # přečteme bytes obrázku
-    image_bytes = await image.read() if image else None
-
     quiz_id = quizzes_svc.create_quiz(
         payload=payload,
-        image_bytes=image_bytes,
-        user_id=1        # TODO: vzít z tokenu
+        image=image,
+        user_id=11        # TODO: vzít z tokenu
     )
 
     return templates.TemplateResponse(

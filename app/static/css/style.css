@@ -935,10 +935,21 @@ button a{
     backdrop-filter: blur(12px);
     padding: 25px;
     border-radius: 20px;
-    width: 380px;
+    width: 450px;
     box-shadow: 0 12px 30px rgba(0,0,0,0.15);
     text-align: center;
     animation: fadeIn 0.25s ease;
+}
+
+#popupNickname a.popup-link {
+    color: #2c639e;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+#popupNickname a.popup-link:hover {
+    color: #153b5e;
+    text-decoration: none;
 }
 
 @keyframes fadeIn {
@@ -1026,14 +1037,25 @@ button a{
     transform: scale(1.05);
 }
 
+.btn-demote {
+    background: linear-gradient(17deg, rgba(20, 66, 166, 1) 23%, rgba(61, 140, 224, 1) 71%);
+    color: white;
+}
+
+.btn-demote:hover {
+    background: linear-gradient(17deg, rgba(16, 51, 125, 1) 23%, rgba(44, 99, 158, 1) 71%);
+    box-shadow: 0 4px 12px rgba(12, 37, 89, 0.3);
+    transform: scale(1.05);
+}
+
 /* červené tlačítko */
 .btn-delete {
-    background: linear-gradient(17deg, #B22222 23%, #FF4C4C 71%);
+    background: linear-gradient(17deg, #511010 23%, #8e2828 71%);
     color: white;
 }
 
 .btn-delete:hover {
-    background: linear-gradient(17deg, #7A0C0C 23%, #D93434 71%);
+    background: linear-gradient(17deg, #3e0b0b 23%, #631a1a 71%);
     box-shadow: 0 4px 12px rgba(178, 34, 34, 0.3);
     transform: scale(1.05);
 }

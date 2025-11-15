@@ -7,7 +7,7 @@ const closeBtn = document.getElementById("closePopup");
 searchInput.addEventListener("input", async () => {
     const q = searchInput.value;
 
-    if (q.length < 2) {
+    if (q.length < 1) {
         resultsBox.innerHTML = "";
         return;
     }
@@ -30,16 +30,29 @@ searchInput.addEventListener("input", async () => {
 function openUserPopup(user) {
     popup.classList.remove("hidden");
 
-    document.getElementById("popupNickname").textContent = user.nickname;
+    document.getElementById("popupNickname").innerHTML = `
+    <a href="/players/${user.id}" class="popup-link">
+        ${user.nickname}</a><span>↗</span>`;
     document.getElementById("popupEmail").textContent = user.email;
     document.getElementById("popupScore").textContent = user.score;
     document.getElementById("popupRole").textContent = user.role;
 
     document.getElementById("newScore").value = user.score;
-
     document.getElementById("saveScoreBtn").onclick = () => updateScore(user.id);
+
+    const roleBtn = document.getElementById("promoteUserBtn");
+    if (user.role === "user") {
+        roleBtn.innerText = "Promote to mod";
+        roleBtn.className = "btn-promote";
+        roleBtn.onclick = () => promoteUser(user.id);
+    }
+    else if (user.role === "moderator") {
+        roleBtn.innerText = "Demote to user";
+        roleBtn.className = "btn-demote";
+        roleBtn.onclick = () => demoteUser(user.id);
+    }
+
     document.getElementById("deleteUserBtn").onclick = () => deleteUser(user.id);
-    document.getElementById("promoteUserBtn").onclick = () => promoteUser(user.id);
 }
 
 closeBtn.onclick = () => popup.classList.add("hidden");
@@ -56,6 +69,19 @@ async function updateScore(id) {
 
     showNotify("✅ Updated!", "Score has been successfully updated.");
     popup.classList.add("hidden");
+
+    searchInput.dispatchEvent(new Event('input'));
+}
+
+async function demoteUser(id) {
+    await fetch(`/admin/demote-user/${id}`, {
+        method: "POST"
+    });
+
+    showNotify("🗑️ Demoted", "User has been successfully demoted to user.");
+    popup.classList.add("hidden");
+
+    searchInput.dispatchEvent(new Event('input'));
 }
 
 async function promoteUser(id) {
@@ -65,6 +91,8 @@ async function promoteUser(id) {
 
     showNotify("🗑️ Promoted", "User has been successfully promoted to moderator.");
     popup.classList.add("hidden");
+
+    searchInput.dispatchEvent(new Event('input'));
 }
 
 async function deleteUser(id) {
@@ -74,6 +102,8 @@ async function deleteUser(id) {
 
     showNotify("🗑️ Deleted", "Account has been successfully deleted.");
     popup.classList.add("hidden");
+
+    searchInput.dispatchEvent(new Event('input'));
 }
 
 function showNotify(title, message) {

@@ -3,7 +3,12 @@
 {% block content %}
 
 <div class="quiz-create-container">
-    <h2 class="create-title">Quiz created successfully! 😍</h2>
+    <h2 class="create-title">Quiz created successfully!</h2>
+    <div class="dashboard-buttons-wrapper">
+        <div class="hero-btn" style="justify-self: center">
+            <p style="text-decoration: none"><a href="/quizzes/{{quiz_id}}" style="text-decoration: none; color:#fff">View your quiz here😍</a></p>
+        </div>
+    </div>
 </div>
 
 {% endblock content %}
