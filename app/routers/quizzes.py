@@ -33,7 +33,7 @@ async def post_quiz_form(
     quiz_id = quizzes_svc.create_quiz(
         payload=payload,
         image=image,
-        user_id=11        # TODO: vzít z tokenu
+        user_id=6        # TODO: vzít z tokenu
     )
 
     return templates.TemplateResponse(

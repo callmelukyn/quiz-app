@@ -1,30 +1,16 @@
-MY PROFILE tlacitko zmenit asi na avatar, nick a body -we ll see
-Tlačítko v dashboardu se mění podle toho kde jsi
-Zahashovat hesla z registrace a pak nějak odhashovat při loginu
-
-
-:8000/player/{id z users} na zobrazeni profilu
-(asi idealne bez dashboardu zobrazeni hráče, proklikem z tabulky)
-
-dashboard/quiz/{id kvizu}
-(tady pokud se jedna o cizi kviz, tak hraju, pokud je to muj tak mam moznosti mazat a edit)
-
-napadlo me i player/{id hrace/nebo mozna unikatni nickname?}/{id kvizu}
-tohle by mohli byt ty prokliky na samotné kvízy taky.
-
+TODO AUTH PICOVINKY, nerozumim tomu
 Nez se user dostane na /dashboard, je treba projít pres /auth/{register/login}.
 JAK VUBEC MA VYPADAT SELECT KDE BUDE USER = "TEN DANÝ USER" ????
 Auth by mel vzdy nejak overit token nez da redirect na /dashboard.
 A nebo to funguje tak - ze ja si getnu /dashboard a ten dashboard musí hodit neco s authem ?
 Protoze jinak bych mohl obejit auth tim ze napisu /dashboard.
 
-
 Kontaktni formular, admin muze odpovidat na dotaz. nekde v dashobarDu uvidi tickety
 
-Admin muze menit role uživatelů, podle ID asi
+Za svuj kviz nesmim dostat body
 
+Dodelat /players/{nickname}, kterej bude unique
 
-UDELAT UNIKATNI EMAILY A NICKNAMES DO DB PRES LOGIN/rEGISTER, at muze byt players/lukyn
+V dashboardu vpravo nahoře zobrazovat "ukázku" mého profilu. Nickname, avatar possibly, score. Po kliku zobrazit players/{current_user}
 
-
-Po smazani kvizu/uzivatele s kvizama atd tak se nesmazou fotky z galerie
+Zahashovat hesla z registrace a pak nějak odhashovat při loginu

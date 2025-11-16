@@ -53,33 +53,24 @@ def get_mine_quizzes(id: int):
         ).fetchall()
         return rows
 
-##Vytvoreni kvizu
-
 def save_image(image: UploadFile | None):
-    """
-    Uloží obrázek do složky a vrátí final path.
-    """
-    if not image:
+    # Pokud není obrázek nebo je prázdné filename, dej default
+    if not image or image.filename == "":
         return "database/quiz_img/default.png"
 
     filename = f"{uuid.uuid4()}_{image.filename}"
     save_path = f"app/database/quiz_img/{filename}"
 
-    # image.file je SpooledTemporaryFile
     with open(save_path, "wb") as f:
         f.write(image.file.read())
 
     return f"database/quiz_img/{filename}"
 
 def create_quiz(payload: dict, image: UploadFile | None, user_id: int = 1):
-    """
-    Uloží kvíz + otázky + odpovědi.
-    """
     title = payload["title"]
     desc = payload["description"]
     questions = payload["questions"]
 
-    # Obrázek
     image_path = save_image(image)
 
     with get_conn() as c:
@@ -109,7 +100,5 @@ def create_quiz(payload: dict, image: UploadFile | None, user_id: int = 1):
                     """,
                     (question_id, ans["text"], ans["correct"])
                 )
-
         c.commit()
-
     return quiz_id
