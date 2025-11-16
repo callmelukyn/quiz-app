@@ -7,17 +7,22 @@
     <title>Quizzer - Create, compete, enjoy</title>
 </head>
 <body>
-
-
 <div class="quiz-create-container">
-
     <h2 class="create-title">Quiz Result</h2>
-
     <div class="result-card">
+        <!-- === PROGRESS BAR === -->
+        <div class="progress-container" data-percent="{{ percent }}">
+            <svg class="progress-ring" width="160" height="160">
+                <circle class="progress-ring__circle-bg" cx="80" cy="80" r="70"/>
+                <circle class="progress-ring__circle" cx="80" cy="80" r="70"/>
+            </svg>
+            <div class="progress-text">
+                {{ percent }}%
+            </div>
+        </div>
+        <!-- === END PROGRESS BAR === -->
 
-        <h3 class="result-score">{{ percent }}%</h3>
         <p class="result-sub">Correct: {{ correct }} / {{ total }}</p>
-
         {% if percent == 100 %}
         <p class="result-perfect">Perfect score! 🎉</p>
         {% endif %}
@@ -30,8 +35,9 @@
             <a href="/quizzes/" class="btn-primary">Back to quizzes</a>
             <a href="/play/{{ quiz.id }}" class="btn-green">Play again</a>
         </div>
-
     </div>
 </div>
+
+<script src="{{ url_for('static', path='/js/circle-progress-bar.js') }}"></script>
 </body>
 </html>

@@ -1142,3 +1142,40 @@ button a{
 .result-card {
     justify-items: center;
 }
+
+.progress-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 20px auto;
+}
+
+.progress-ring {
+    transform: rotate(-90deg);
+}
+
+.progress-ring__circle-bg {
+    fill: none;
+    stroke: #e1e1e1;
+    stroke-width: 12;
+}
+
+.progress-ring__circle {
+    fill: none;
+    stroke: #4caf50;
+    stroke-width: 12;
+    stroke-linecap: round;
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+    transition: stroke-dashoffset 1.2s ease;
+}
+
+.progress-text {
+    position: absolute;
+    width: 100%;
+    top: 55px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: 700;
+    color: #333;
+}

@@ -106,7 +106,7 @@ def create_quiz(payload: dict, image: UploadFile | None, user_id: int = 1):
 def get_average_score(quiz_id: int):
     with get_conn() as c:
         row = c.execute("""
-            SELECT COALESCE(AVG(score), 0) as average_score
+            SELECT COALESCE(ROUND(AVG(score),2), 0) as average_score
             FROM quiz_results
             WHERE quiz_id = ?;
         """,(quiz_id,)).fetchone()
@@ -115,7 +115,7 @@ def get_average_score(quiz_id: int):
 def get_your_average_score(quiz_id: int, user_id: int):
     with get_conn() as c:
         row = c.execute("""
-            SELECT COALESCE(AVG(score), 0) as average_score
+            SELECT COALESCE(ROUND(AVG(score),2), 0) as average_score
             FROM quiz_results
             WHERE quiz_id = ? AND user_id = ?;
         """,(quiz_id,user_id)).fetchone()
