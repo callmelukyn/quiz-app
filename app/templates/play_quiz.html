@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', path='/img/favicon.ico') }}">
+    <title>Quizzer - Create, compete, enjoy</title>
+</head>
+<body>
+<div class="nav">
+    <div>
+        <a class="nav-logo" href="/dashboard/"><img src="{{ url_for('static', path='/img/favicon.ico') }}"></a>
+    </div>
+    <div class="nav-button">
+        <a class="dashboard-btn-red" href="/quizzes/{{ quiz.id }}">ABANDON QUIZ</a>
+    </div>
+</div>
+
+<div class="quiz-create-container">
+    <h2 class="create-title">{{ quiz.title }}</h2>
+    <p class="quiz-desc">{{ quiz.description }}</p>
+    <form method="POST">
+
+        {% for q in quiz.questions %}
+        <div class="question-card">
+            <h3 class="question-title">{{ loop.index }}. {{ q.text }}</h3>
+
+            <div class="answers-box">
+                {% for a in q.answers %}
+                <label class="answer-row">
+                    <input type="radio" name="q_{{ q.id }}" value="{{ a.id }}" required>
+                    <span class="answer-text">{{ a.text }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+
+        <div class="quiz-create-buttons">
+            <button type="submit" class="btn-green">Submit Quiz</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

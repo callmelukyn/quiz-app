@@ -55,10 +55,10 @@ def init_db():
             );
             """)
 
-        # Výsledky hraní kvízu (volitelné pro rozšíření)
+        # Výsledky hraní kvízu
         c.execute("""
         CREATE TABLE IF NOT EXISTS quiz_results (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
+               id INTEGER PRIMARY KEY AUTOINCREMENT,
                user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
                quiz_id INTEGER REFERENCES quizzes(id) ON DELETE CASCADE,
                score INTEGER DEFAULT 0,

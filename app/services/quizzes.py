@@ -102,3 +102,40 @@ def create_quiz(payload: dict, image: UploadFile | None, user_id: int = 1):
                 )
         c.commit()
     return quiz_id
+
+def get_average_score(quiz_id: int):
+    with get_conn() as c:
+        row = c.execute("""
+            SELECT COALESCE(AVG(score), 0) as average_score
+            FROM quiz_results
+            WHERE quiz_id = ?;
+        """,(quiz_id,)).fetchone()
+    return row["average_score"]
+
+def get_your_average_score(quiz_id: int, user_id: int):
+    with get_conn() as c:
+        row = c.execute("""
+            SELECT COALESCE(AVG(score), 0) as average_score
+            FROM quiz_results
+            WHERE quiz_id = ? AND user_id = ?;
+        """,(quiz_id,user_id)).fetchone()
+    return row["average_score"]
+
+
+def get_number_of_entries(quiz_id: int):
+    with get_conn() as c:
+        row = c.execute("""
+            SELECT COUNT(*) as count
+            FROM quiz_results
+            WHERE quiz_id = ?;
+        """,(quiz_id,)).fetchone()
+    return row["count"]
+
+def get_number_of_your_entries(quiz_id: int, user_id: int):
+    with get_conn() as c:
+        row = c.execute("""
+            SELECT COUNT(*) as count
+            FROM quiz_results
+            WHERE quiz_id = ? AND user_id = ?;
+        """,(quiz_id,user_id)).fetchone()
+    return row["count"]

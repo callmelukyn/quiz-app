@@ -4,11 +4,13 @@ from app.database.database import get_conn
 
 def add_points(player_id: int, added_points: int):
     with get_conn() as c:
-        rows = c.execute(
+        c.execute(
             """UPDATE users
-            SET score = """
+                SET score = score +?
+                WHERE id = ?
+            """,(added_points, player_id)
         )
-        return rows
+        c.commit()
 
 def remove_file_from_db(filename: str):
     print(f"Removing {filename}...")

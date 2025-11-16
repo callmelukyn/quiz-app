@@ -50,18 +50,24 @@ def show_all_quizzes(request: Request):
 
 @router.get("/mine", response_class=HTMLResponse)
 def show_all_quizzes(request: Request):
-    user_id: int = 1
-    quizzes = quizzes_svc.get_mine_quizzes(user_id)    #TODO service pro získání kvízu pouze uživatele
+    quizzes = quizzes_svc.get_mine_quizzes(1)    #TODO service pro získání kvízu pouze uživatele
     return templates.TemplateResponse(
         "my_quizzes.html", {"request": request, "quizzes": quizzes}
     )
 #TODO Z tokenu zjistit ID uzivatele a dat do funkce
 
-@router.get("/{id}", response_class=HTMLResponse)
-def show_quiz(request: Request, id: int):
-    quiz = quizzes_svc.get_quiz(id)
+@router.get("/{quiz_id}", response_class=HTMLResponse)
+def show_quiz(request: Request, quiz_id: int):
+    #quiz card
+    quiz = quizzes_svc.get_quiz(quiz_id)
+    #stats
+    average_score = quizzes_svc.get_average_score(quiz_id)
+    your_average_score = quizzes_svc.get_your_average_score(quiz_id, 2)
+    total_entries = quizzes_svc.get_number_of_entries(quiz_id)
+    your_entries = quizzes_svc.get_number_of_your_entries(quiz_id,2) #TODO fixnout na token
+    stats = (average_score, your_average_score, total_entries, your_entries)
     return templates.TemplateResponse(
-        "quiz.html", {"request": request, "quiz": quiz}
+        "quiz.html", {"request": request, "quiz": quiz, "stats": stats}
     )
 
 

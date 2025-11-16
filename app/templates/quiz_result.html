@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', path='/img/favicon.ico') }}">
+    <title>Quizzer - Create, compete, enjoy</title>
+</head>
+<body>
+
+
+<div class="quiz-create-container">
+
+    <h2 class="create-title">Quiz Result</h2>
+
+    <div class="result-card">
+
+        <h3 class="result-score">{{ percent }}%</h3>
+        <p class="result-sub">Correct: {{ correct }} / {{ total }}</p>
+
+        {% if percent == 100 %}
+        <p class="result-perfect">Perfect score! 🎉</p>
+        {% endif %}
+
+        {% if user_eligible %}
+        <p class="result-perfect">+100 Points🪙</p>
+        {% endif %}
+
+        <div class="quiz-create-buttons">
+            <a href="/quizzes/" class="btn-primary">Back to quizzes</a>
+            <a href="/play/{{ quiz.id }}" class="btn-green">Play again</a>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>

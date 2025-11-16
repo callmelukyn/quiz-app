@@ -14,3 +14,6 @@ Dodelat /players/{nickname}, kterej bude unique
 V dashboardu vpravo nahoře zobrazovat "ukázku" mého profilu. Nickname, avatar possibly, score. Po kliku zobrazit players/{current_user}
 
 Zahashovat hesla z registrace a pak nějak odhashovat při loginu
+
+TODO Pokazde co nekdo zahraje kviz, kviz owner dostane body (idealne az kviz nekdo cely dohraje)
+#TODO - balancing by bylo, kdyby body owner ziskal jen kdyz player dostava body za vyplneni kvizu poprve na 100% (omezeni proti spamu)

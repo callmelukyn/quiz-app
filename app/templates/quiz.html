@@ -1,10 +1,12 @@
 {% extends "dashboard.html" %}
 {% block content %}
-
-<div class="quiz-section-container">
+<div class="info">
+    <p>Click on quiz card in order to play: <b>{{ quiz[0][1] }}</b></p>
+</div>
+<div class="quiz-section-container-stats">
     <div class="quiz-card-grid">
         {% for q in quiz %}
-        <a href="/quizzes/{{ q[4] }}" class="quiz-card-link">
+        <a href="/play/{{ q[4] }}" class="quiz-card-link">
             <div class="quiz-card">
                 <img src="{{ url_for('quiz_img', path=q[0].split('quiz_img/')[-1]) }}"
                      alt="Quiz image"
@@ -19,6 +21,17 @@
         {% else %}
         <p class="no-quizzes">No quizzes have been created yet 😢</p>
         {% endfor %}
+    </div>
+    <div class="quiz-stats-grid">
+        <div class="quiz-stats-card">
+            <div class="quiz-card-content">
+                <h3 class="quiz-stats-title">Quiz statistics</h3>
+                <p class="quiz-stats-description">Total played by everyone: {{stats[2]}}x</p>
+                <p class="quiz-stats-description">Average score: {{stats[0]}}%</p>
+                <p class="quiz-stats-description">Total played by you: {{stats[3]}}x</p>
+                <p class="quiz-stats-description">Your average score: {{stats[1]}}%</p>
+            </div>
+        </div>
     </div>
 </div>
 
