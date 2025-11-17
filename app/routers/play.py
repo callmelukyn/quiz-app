@@ -38,7 +38,7 @@ async def evaluate_quiz(request: Request, id: int):
     if user_eligible:
         system_svc.add_points(user_id, 100) #TODO 100 Bodu za 100% na kvizu, one-time, mozna fixnu
         system_svc.add_points_to_quiz_owner(id) #TODO Ve funkci je 10 bodu za splneni kvizu pro ownera
-    print(user_eligible)
+        print(f"User is eligible, giving 100 points to {user_id} and 10 points to quiz author")
     return templates.TemplateResponse(
         "quiz_result.html",
         {

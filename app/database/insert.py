@@ -2,12 +2,12 @@ from app.database.init_db import get_conn
 
 def insert_test_users():
     users = [
-        ("bobice@example.com", "gigachad", "Heslo123", 235),
-        ("laixcz@seznam.cz", "callmelukyn", "Heslo123", 6767),
-        ("ericcartman@example.com", "playerultimate67", "Heslo123", 200),
-        ("kylebrowlovski@example.com", "ihatecartman", "Heslo123", 682),
-        ("drakethegod@example.com", "godsplan89", "Heslo123", 937),
-        ("eminemiloveyou@example.com", "eminemlover41", "Heslo123", 2137)
+        ("bobice@example.com", "gigachad", "Heslo123", 0),
+        ("laixcz@seznam.cz", "callmelukyn", "Heslo123", 0),
+        ("ericcartman@example.com", "playerultimate67", "Heslo123", 0),
+        ("kylebrowlovski@example.com", "ihatecartman", "Heslo123", 0),
+        ("drakethegod@example.com", "godsplan89", "Heslo123", 0),
+        ("eminemiloveyou@example.com", "eminemlover41", "Heslo123", 0)
     ]
 
     quizzes = [
