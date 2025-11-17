@@ -9,21 +9,34 @@
 <body>
     {% include "nav-bar.html" %}
     {% block content %}
-    <div class="leaderboard-hero">
-        <h1>{{ player[0] }}</h1>
-    </div>
+<div class="leaderboard-hero">
+    <h1>Statistics</h1>
+</div>
 
-    <div class="split-section">
-        <div class="split-text">
-            <h2>{{ player[0] }}</h2>
-            <p>Score: {{ player[1] }}</p>
-            <p>Position: {{ player[2] }}</p>
-            <p>Role: {{ player[3] }}</p>
-        </div>
-        <div class="split-image">
-            <img src="../static/img/quiz.png" alt="About The Quizzer">
+<div class="quiz-section-container-stats">
+    <div class="quiz-stats-grid">
+        <div class="quiz-stats-card">
+            <div class="quiz-card-content">
+                <h3 class="quiz-stats-title">{{ player[0] }}</h3>
+                <p class="quiz-stats-description">Score: {{ player[1] }}</p>
+                <p class="quiz-stats-description">Score obtained by others:</p>
+                <p class="quiz-stats-description">Quizzes created:</p>
+                {% set position = player[2] %}
+                {% if position == 1 %}
+                <p class="quiz-stats-description">Position: {{ player[2] }} 🥇</p>
+                {% elif position == 2 %}
+                <p class="quiz-stats-description">Position: {{ player[2] }} 🥈</p>
+                {% elif position == 3 %}
+                <p class="quiz-stats-description">Position: {{ player[2] }} 🥉</p>
+                {% else %}
+                <p class="quiz-stats-description">Position: {{ player[2] }}</p>
+                {% endif %}
+                <p class="quiz-stats-description">Role: {{ player[3] }}</p>
+            </div>
         </div>
     </div>
+</div>
+
 {% endblock %}
 
     {% include "footer.html" %}

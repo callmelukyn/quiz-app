@@ -1,7 +1,6 @@
 from fastapi import UploadFile
-
 from app.database.database import get_conn
-import json,uuid
+import uuid
 
 def get_all_quizzes():
     with get_conn() as c:
