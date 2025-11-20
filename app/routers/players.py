@@ -8,8 +8,9 @@ templates = Jinja2Templates(directory="app/templates")
 
 
 @router.get("/{id}", response_class=HTMLResponse)
-def show_dashboard(request: Request, id: int):
+def show_player_stats(request: Request, id: int):
     player = players_svc.get_player_statistics(id)
+    quiz_stats = players_svc.get_quiz_statistics(id)
     return templates.TemplateResponse(
-        "players.html", {"request": request, "player": player}
+        "players.html", {"request": request, "player": player, "quiz_stats": quiz_stats}
     )

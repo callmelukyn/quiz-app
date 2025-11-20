@@ -66,6 +66,14 @@ def init_db():
            );
            """)
 
+        c.execute("""
+        CREATE TABLE IF NOT EXISTS sessions (
+               session_id INTEGER PRIMARY KEY AUTOINCREMENT,
+               user_id INTEGER NOT NULL,
+               session_code TEXT NOT NULL UNIQUE
+           );
+           """)
+
         c.commit()
 
 

@@ -19,10 +19,11 @@ def login_form_post(request: Request, email: str = Form(...), password: str = Fo
         return templates.TemplateResponse("login.html", {"request": request, "data": (email, password), "errors": errors})
 
     user_id = auth.get_user_id_by_email(email)
+    session_token = auth.get_and_insert_session(user_id)
     response = RedirectResponse("/dashboard", status_code=302)
     response.set_cookie(
         key="session",
-        value=str(user_id),
+        value=str(session_token),
         httponly=True,
         samesite="lax",
         path="/",
@@ -44,10 +45,11 @@ def register_form_post(request: Request, email: str = Form(...), name: str = For
     hashed_password = auth.hash_password(password)
     auth.register(email,name,hashed_password)
     user_id = auth.get_user_id_by_email(email)
+    session_token = auth.get_and_insert_session(user_id)
     response = RedirectResponse("/dashboard", status_code=302)
     response.set_cookie(
         key="session",
-        value=str(user_id),
+        value=str(session_token),
         httponly=True,
         samesite="lax",
         path="/",

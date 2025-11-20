@@ -3,6 +3,7 @@ from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 
 import app.services.session as session_svc
+import app.services.auth as auth_svc
 
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
@@ -19,12 +20,13 @@ def show_dashboard(request: Request, user=Depends(session_svc.get_current_user))
     return response
 
 @router.get("/logout")
-def logout():
+def logout(request: Request, user=Depends(session_svc.get_current_user)):
+    auth_svc.remove_session(user["id"])
     response = RedirectResponse("/auth/login", status_code=302)
     response.delete_cookie(
         "session",
         path="/",
         samesite="lax",
-        secure = False,
+        secure = False
     )
     return response

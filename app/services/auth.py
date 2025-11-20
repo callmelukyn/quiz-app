@@ -1,5 +1,5 @@
 import bcrypt
-
+import secrets
 from app.database.database import get_conn
 
 
@@ -58,5 +58,22 @@ def get_user_id_by_email(email):
         r = c.execute("SELECT id FROM users WHERE email = ?", (email,)).fetchone()
         return r["id"]
 
+def get_and_insert_session(user_id: int):
+    session_code = make_token()
+    with get_conn() as c:
+        c.execute("""
+            INSERT INTO sessions (user_id, session_code) VALUES (?, ?)
+        """, (user_id, session_code))
+        c.commit()
+    return session_code
+
 def check_password(password, hashed_password):
     return bcrypt.checkpw(password.encode("utf-8"), hashed_password)
+
+def remove_session(user_id: int):
+    with get_conn() as c:
+        c.execute("DELETE FROM sessions WHERE user_id = ?", (user_id,))
+        c.commit()
+
+def make_token():
+    return secrets.token_urlsafe(16)

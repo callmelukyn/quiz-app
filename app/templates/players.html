@@ -19,8 +19,8 @@
             <div class="quiz-card-content">
                 <h3 class="quiz-stats-title">{{ player[0] }}</h3>
                 <p class="quiz-stats-description">Score: {{ player[1] }}</p>
-                <p class="quiz-stats-description">Score obtained by others:</p>
-                <p class="quiz-stats-description">Quizzes created:</p>
+                <p class="quiz-stats-description">Score obtained by others: {{ quiz_stats[1] }}</p>
+                <p class="quiz-stats-description">Quizzes created: {{ quiz_stats[0] }}</p>
                 {% set position = player[2] %}
                 {% if position == 1 %}
                 <p class="quiz-stats-description">Position: {{ player[2] }} 🥇</p>

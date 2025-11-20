@@ -56,6 +56,15 @@ def is_user_eligible_to_get_points(quiz_id: int, user_id: int):
             WHERE quiz_id = ? AND user_id = ? AND score = 100;
         """, (quiz_id, user_id)).fetchone()
         if row["count"] == 1:
-            return True
+            author = c.execute("""
+                SELECT COUNT(*) as count
+                FROM quizzes
+                WHERE user_id = ?
+                AND id = ?;
+            """, (user_id, quiz_id)).fetchone()
+            if author["count"] == 1:
+                return False #pokud je majitel kvizu False
+            else:
+                return True #neni majitel kvizu
         else:
-            return False
+            return False #uzivatel má v logs vícekrát 100 Score, neni mozne dostat body znovu
