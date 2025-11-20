@@ -12,13 +12,16 @@
         <div class="form-container">
             <h2>Register</h2>
             <form action="/auth/register" method="post">
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="text" name="name" placeholder="Nickname" required>
+                <input type="email" name="email" placeholder="Email" value="{{ data[0]|default('') }}"required>
+                <input type="text" name="name" placeholder="Nickname" value="{{ data[1]|default('') }}" required>
                 <input type="password" name="password" placeholder="Password" required>
                 <button type="submit">REGISTER</button>
             </form>
             <div class="form-footer">
                 Already have an account? <a href="/auth/login">Login</a>
+                {% for e in errors %}
+                <p>{{e}}</p>
+                {% endfor %}
             </div>
         </div>
     </div>

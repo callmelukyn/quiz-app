@@ -8,17 +8,30 @@
 </head>
 <body>
     <div class="leaderboard-hero">
-        <h1> <a href="/dashboard">Dashboard</a></h1>
+        <h1><a href="/dashboard">Dashboard</a></h1>
     </div>
 
+    <!-- NAVIGATION BAR -->
     <div class="nav">
         <div>
             <a class="nav-logo" href="/">
                 <img src="../static/img/favicon.ico">
             </a>
         </div>
-        <div class="nav-button">
-            <a class="nav-btn" href="/">MY PROFILE</a>
+        <!-- USER INFO + LOGOUT BUTTON -->
+        <div class="nav-user-panel">
+            <!-- Zobrazení nickname -->
+            <span class="nav-username">
+                <a href="/players/{{ user.id }}" target="_blank">
+                    {{ user.nickname }}
+                </a>
+            </span>
+            <span class="nav-userpoints">
+                [ {{ user.score }} points ]
+            </span>
+            <div class="nav-button">
+            <a class="nav-btn-logout" href="/dashboard/logout">LOGOUT</a>
+        </div>
         </div>
     </div>
 
@@ -28,16 +41,19 @@
         <a class="dashboard-btn" href="/quizzes/mine">MY Quizzes</a>
         <a class="dashboard-btn-green" href="/quizzes/create">📄Create Quiz</a>
         <a class="dashboard-btn-gold" href="/leaderboard" target="_blank">🏆Leaderboard</a>
-        <!-- IF ROLE JE ADMIN TAK JESTE:       -->
-       <a class="dashboard-btn-red" href="/admin">😈Admin Tools</a>
+
+        <!-- ADMIN ONLY -->
+        {% if user.role == 'admin' %}
+            <a class="dashboard-btn-red" href="/admin">😈Admin Tools</a>
+        {% endif %}
     </div>
 
     {% block content %}
-
+        <p class="info">Hello {{ user.nickname }}, choose what you want to do.  </p>
     {% endblock content %}
 
     {% include "footer.html" %}
 
-<script src="{{ url_for('static', path='/js/sticky-nav.js') }}"></script>
+    <script src="{{ url_for('static', path='/js/sticky-nav.js') }}"></script>
 </body>
 </html>

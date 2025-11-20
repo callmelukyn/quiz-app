@@ -544,6 +544,46 @@ button a{
     flex-wrap: wrap;
 }
 
+.nav-user-panel{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.nav-username{
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.nav-username a{
+    text-decoration: none;
+    color: black;
+}
+
+.nav-userpoints{
+    color: #1f4a77;
+}
+.nav-btn-logout{
+    display: inline-block;
+    background: linear-gradient(17deg, #77081f 23%, #a55e17 71%);
+    color: white;
+    font-family: "Cantarell", sans-serif;
+    border-radius: 8px;
+    padding: 12px 26px;
+    font-size: 1rem;
+    text-decoration: none;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.nav-btn-logout:hover{
+    background: linear-gradient(17deg, #c54110 23%, #8e0415 71%);
+    box-shadow: 0 4px 12px rgba(170, 65, 7, 0.51);
+    transform: scale(1.05);
+}
+
 .dashboard-btn {
     display: inline-block;
     background: linear-gradient(17deg, rgba(20, 66, 166, 1) 23%, rgba(61, 140, 224, 1) 71%);

@@ -1,13 +1,14 @@
 from app.database.init_db import get_conn
 
 def insert_test_users():
+
     users = [
-        ("bobice@example.com", "gigachad", "Heslo123", 0),
-        ("laixcz@seznam.cz", "callmelukyn", "Heslo123", 0),
-        ("ericcartman@example.com", "playerultimate67", "Heslo123", 0),
-        ("kylebrowlovski@example.com", "ihatecartman", "Heslo123", 0),
-        ("drakethegod@example.com", "godsplan89", "Heslo123", 0),
-        ("eminemiloveyou@example.com", "eminemlover41", "Heslo123", 0)
+        ("bobice@example.com", "gigachad", "Heslo123", 0, 0),
+        ("random@ez.cz", "uniuquenick", "Heslo123", 0, 0),
+        ("ericcartman@example.com", "playerultimate67", "Heslo123", 0, 0),
+        ("kylebrowlovski@example.com", "ihatecartman", "Heslo123", 0, 0),
+        ("drakethegod@example.com", "godsplan89", "Heslo123", 0, 0),
+        ("eminemiloveyou@example.com", "eminemlover41", "Heslo123", 0, 0)
     ]
 
     quizzes = [
@@ -18,13 +19,13 @@ def insert_test_users():
     ]
 
     with get_conn() as c:
-        for email, nickname, password, score in users:
+        for email, nickname, password, score, role_id in users:
             c.execute(
                 """
-                INSERT OR IGNORE INTO users (email, nickname, password_hash, score)
-                VALUES (?, ?, ?, ?)
+                INSERT OR IGNORE INTO users (email, nickname, password_hash, score, role_id)
+                VALUES (?, ?, ?, ?, ?)
                 """,
-                (email, nickname, password, score),
+                (email, nickname, password, score, role_id)
             )
         c.commit()
 

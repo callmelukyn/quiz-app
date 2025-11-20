@@ -4,3 +4,4 @@ python-dotenv
 pydantic_settings
 jinja2
 python-multipart
+bcrypt

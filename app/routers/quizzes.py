@@ -1,9 +1,11 @@
 import json
-from fastapi import APIRouter, Request, Form, UploadFile, File
+from fastapi import APIRouter, Request, Form, UploadFile, File, Depends
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
+from starlette.responses import RedirectResponse
 
 import app.services.quizzes as quizzes_svc
+import app.services.session as session_svc
 
 router = APIRouter()
 templates = Jinja2Templates(directory="app/templates")
@@ -42,18 +44,18 @@ async def post_quiz_form(
     )
 
 @router.get("/", response_class=HTMLResponse)
-def show_all_quizzes(request: Request):
+def show_all_quizzes(request: Request, user=Depends(session_svc.get_current_user)):
     quizzes = quizzes_svc.get_all_quizzes()
     return templates.TemplateResponse(
-        "all_quizzes.html", {"request": request, "quizzes": quizzes}
+        "all_quizzes.html", {"request": request, "quizzes": quizzes, "user": user}
     )
 
 @router.get("/mine", response_class=HTMLResponse)
-def show_all_quizzes(request: Request):
+def show_mine_quizzes(request: Request, user=Depends(session_svc.get_current_user)):
+    if not user:
+        return RedirectResponse("/auth/login")
     quizzes = quizzes_svc.get_mine_quizzes(1)    #TODO service pro získání kvízu pouze uživatele
-    return templates.TemplateResponse(
-        "my_quizzes.html", {"request": request, "quizzes": quizzes}
-    )
+    return templates.TemplateResponse("my_quizzes.html", {"request": request, "quizzes": quizzes, "user": user})
 #TODO Z tokenu zjistit ID uzivatele a dat do funkce
 
 @router.get("/{quiz_id}", response_class=HTMLResponse)

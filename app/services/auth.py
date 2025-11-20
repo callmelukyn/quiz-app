@@ -1,23 +1,62 @@
+import bcrypt
+
 from app.database.database import get_conn
 
 
-def register(email, nickname, password):
+def register(email, nickname, hashed_password):
     with get_conn() as c:
         c.execute(
             """INSERT OR IGNORE INTO users (email, nickname, password_hash) VALUES (?, ?, ?)"""
-            ,(email, nickname, password)
+            ,(email, nickname, hashed_password)
         )
         c.commit()
 
-def login(email, password):
+def register_check_availability(email, nickname):
     with get_conn() as c:
-        r = c.execute(
-            """
-            SELECT * FROM users WHERE email = ? and password_hash = ?
-            """, (email, password)
-        ).fetchall()
+        errors = []
+        email_row = c.execute(
+            "SELECT email FROM users WHERE email = ?", (email,)
+        ).fetchone()
+        if email_row:
+            errors.append(f'Email {email_row["email"]} is already registered')
 
-        if (len(r) == 1):
-            return True
-        else:
-            return False
+        nick_row = c.execute(
+            "SELECT nickname FROM users WHERE nickname = ?", (nickname,)
+        ).fetchone()
+        if nick_row:
+            errors.append(f'Nickname {nick_row["nickname"]} is already in use')
+
+    return errors
+
+def login_check(email, password):
+    with get_conn() as c:
+        user = c.execute(
+            "SELECT * FROM users WHERE email = ?", (email,)
+        ).fetchone()
+
+        if not user:
+            return ["Email is not registered"]
+
+        if not bcrypt.checkpw(password.encode("utf-8"), user["password_hash"]):
+            return ["Incorrect password"]
+
+    return []
+
+def hash_password(password):
+    pw = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
+    print(pw)
+    return pw
+
+
+def get_user_hashed_password(email):
+    with get_conn() as c:
+        r = c.execute("SELECT password_hash FROM users WHERE email = ?", (email,)).fetchone()
+    return r["password_hash"]
+
+def get_user_id_by_email(email):
+    with get_conn() as c:
+        r = c.execute("SELECT id FROM users WHERE email = ?", (email,)).fetchone()
+        return r["id"]
+
+def check_password(password, hashed_password):
+    return bcrypt.checkpw(password.encode("utf-8"), hashed_password)
