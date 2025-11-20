@@ -39,17 +39,19 @@ function openUserPopup(user) {
 
     document.getElementById("newScore").value = user.score;
     document.getElementById("saveScoreBtn").onclick = () => updateScore(user.id);
-
     const roleBtn = document.getElementById("promoteUserBtn");
     if (user.role === "user") {
+        roleBtn.onclick = () => promoteUser(user.id);
         roleBtn.innerText = "Promote to mod";
         roleBtn.className = "btn-promote";
-        roleBtn.onclick = () => promoteUser(user.id);
     }
     else if (user.role === "moderator") {
+        roleBtn.onclick = () => demoteUser(user.id);
         roleBtn.innerText = "Demote to user";
         roleBtn.className = "btn-demote";
-        roleBtn.onclick = () => demoteUser(user.id);
+    } else if (user.role === "admin") {
+        roleBtn.innerText = "Can't be demoted";
+        roleBtn.className = "btn-demote";
     }
 
     document.getElementById("deleteUserBtn").onclick = () => deleteUser(user.id);
