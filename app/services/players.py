@@ -12,7 +12,14 @@ def get_player_statistics(user_id: int):
                ) AS p ON p.id = u.id
                 WHERE u.id = ?
             """, (user_id,)).fetchone()
-        return player
+
+        active = c.execute("""
+            SELECT COUNT(*)
+            FROM sessions
+            WHERE user_id = ?
+        """, (user_id,)).fetchone()
+
+        return (player[0], player[1], player[2], player[3], active[0])
 
 def get_quiz_statistics(user_id: int):
     with get_conn() as c:

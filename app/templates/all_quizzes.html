@@ -12,6 +12,13 @@
                 <div class="quiz-card-content">
                     <h3 class="quiz-card-title">{{ q[1] }}</h3>
                     <p class="quiz-card-description">{{ q[2] }}</p>
+
+                    {% if user["role"] == 'admin' or user["role"] == 'moderator' or user["id"] == q["user_id"] %}
+                    <div class="quiz-buttons-group">
+                        <button class="btn-promote" data-id="{{ q[4] }}">EDIT</button>
+                        <button class="btn-delete" data-id="{{ q[4] }}">DELETE</button>
+                    </div>
+                    {% endif %}
                     <p class="quiz-card-author">Author: {{ q[3] }}</p>
                 </div>
             </div>
@@ -21,5 +28,6 @@
         {% endfor %}
     </div>
 </div>
+<script src="{{ url_for('static', path='/js/quiz-card-buttons.js') }}"></script>
 
 {% endblock %}

@@ -707,6 +707,26 @@ button a{
     margin: 0 auto;
 }
 
+.quiz-buttons-group {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.quiz-buttons-group button {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-family: "Cantarell", sans-serif;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+    position: relative;
+    z-index: 50;
+}
+
 .quiz-card-link {
     text-decoration: none;
     color: inherit;

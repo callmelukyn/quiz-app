@@ -1,2 +1,7 @@
 
-Kontaktni formular, admin muze odpovidat na dotaz. nekde v dashobarDu uvidi tickety
+
+/players/6983264597234 vrati ze neexistuje na html, to samé u všeho co bere int jako nějaky id
+
+Predelat obrazky na blob
+
+

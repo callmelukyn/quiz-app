@@ -1,0 +1,19 @@
+{% extends "dashboard.html" %}
+
+{% block content %}
+
+<div class="quiz-create-container">
+    <h2 class="create-title">Quiz deleted successfully!</h2>
+    <div class="dashboard-buttons-wrapper">
+        <a href="/quizzes/create" style="text-decoration: none; color:#fff">
+        <div class="hero-btn" style="justify-self: center">
+            <p style="text-decoration: none">Create new 🪙</p>
+        </div></a>
+                <a href="/quizzes" style="text-decoration: none; color:#fff">
+        <div class="hero-btn" style="justify-self: center">
+            <p style="text-decoration: none">Show others 🪧</p>
+        </div></a>
+    </div>
+</div>
+
+{% endblock content %}

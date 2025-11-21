@@ -2,23 +2,34 @@
 {% block content %}
 
 <div class="quiz-create-container">
-    <h2 class="create-title">Create New Quiz</h2>
+    <h2 class="create-title">Edit Quiz</h2>
+
     <form id="quizForm" method="POST" enctype="multipart/form-data">
-        <input type="text" id="title" class="input-field" placeholder="Quiz title" required>
-        <textarea id="description" class="input-field textarea-field" placeholder="Quiz description" required></textarea>
+
+        <input type="text" id="title" class="input-field" value="{{ quiz.title }}" required>
+
+        <textarea id="description" class="input-field textarea-field" required>
+            {{ quiz.description }}
+        </textarea>
+
         <div class="image-upload-box" id="dropArea">
             <p>Drop image here or click to upload</p>
             <input type="file" name="image" id="imageInput" accept="image/*" hidden>
-            <img id="previewImage" style="display:none;">
+            <img id="previewImage" src="/{{ quiz.image_path }}" style="display:block;">
         </div>
+
         <div id="questions"></div>
         <div class="quiz-create-buttons">
             <button type="button" class="btn-primary" onclick="addQuestion()">+ Add Question</button>
-            <button type="button" class="btn-green" onclick="submitQuiz()">Create Quiz</button>
+            <button type="button" class="btn-green" onclick="submitQuiz()">Save Changes</button>
         </div>
         <input type="hidden" name="data" id="dataField">
     </form>
 </div>
 
-<script src="{{ url_for('static', path='/js/quiz-creation.js') }}"></script>
+<script>
+    const EXISTING_QUIZ = {{ quiz | tojson }};
+</script>
+<script src="{{ url_for('static', path='/js/quiz-edit.js') }}"></script>
+
 {% endblock content %}

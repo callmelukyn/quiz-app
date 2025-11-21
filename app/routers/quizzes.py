@@ -1,4 +1,6 @@
 import json
+from http.client import responses
+
 from fastapi import APIRouter, Request, Form, UploadFile, File, Depends
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
@@ -68,8 +70,30 @@ def show_quiz(request: Request, quiz_id: int, user=Depends(session_svc.get_curre
     your_entries = quizzes_svc.get_number_of_your_entries(quiz_id,user_id)
     stats = (average_score, your_average_score, total_entries, your_entries)
     return templates.TemplateResponse(
-        "quiz.html", {"request": request, "quiz": quiz, "stats": stats, "user": user}
-    )
+        "quiz.html", {"request": request, "quiz": quiz, "stats": stats, "user": user})
 
+@router.get("/delete/{quiz_id}", response_class=HTMLResponse)
+def delete_quiz(request: Request, quiz_id: int, user=Depends(session_svc.get_current_user)):
+    if quizzes_svc.delete_quiz(quiz_id, user["id"]):
+        return templates.TemplateResponse("quiz_deleted.html", {"request": request, "user": user})
+    else:
+        return templates.TemplateResponse("quiz_deleted_failed.html", {"request": request, "user": user})
+
+@router.get("/edit/{quiz_id}", response_class=HTMLResponse)
+def edit_quiz(request: Request, quiz_id: int, user=Depends(session_svc.get_current_user)):
+    quiz = quizzes_svc.get_quiz_full(quiz_id)
+    return templates.TemplateResponse("edit_quiz.html", {"request": request, "quiz": quiz, "user": user})
+
+@router.post("/edit/{quiz_id}", response_class=HTMLResponse)
+async def edit_quiz_post(
+    request: Request,
+    quiz_id: int,
+    user=Depends(session_svc.get_current_user),
+    data: str = Form(None),
+    image: UploadFile = File(None),
+):
+    payload = json.loads(data)
+    quizzes_svc.update_quiz(quiz_id, payload, image)
+    return templates.TemplateResponse("quiz_updated.html", {"request": request,"quiz_id": quiz_id,"user": user})
 
 

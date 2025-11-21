@@ -12,7 +12,6 @@
 <div class="leaderboard-hero">
     <h1>Statistics</h1>
 </div>
-
 <div class="quiz-section-container-stats">
     <div class="quiz-stats-grid">
         <div class="quiz-stats-card">
@@ -32,6 +31,11 @@
                 <p class="quiz-stats-description">Position: {{ player[2] }}</p>
                 {% endif %}
                 <p class="quiz-stats-description">Role: {{ player[3] }}</p>
+                {% if player[4] == 1 %}
+                <p class="info">STATUS: <span style="color: #1b8f4b; text-shadow: rgba(27,143,75,0.75) 1px 0 10px; font-size: 20px">ONLINE </span></p>
+                {% else %}
+                <p class="info">STATUS: <span style="color: #b12727; text-shadow: rgba(177,39,39,0.76) 1px 0 10px; font-size: 20px">OFFLINE </span></p>
+                {% endif %}
             </div>
         </div>
     </div>
