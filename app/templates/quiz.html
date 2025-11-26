@@ -1,46 +1,52 @@
 {% extends "dashboard.html" %}
 {% block content %}
 <div class="info">
-    <p>Click on quiz card in order to play: <b>{{ quiz[0][1] }}</b></p>
+    <p>Click on quiz card in order to play: <b>{{ quiz["title"] }}</b></p>
 </div>
+
 <div class="quiz-section-container-stats">
     <div class="quiz-card-grid">
-        {% for q in quiz %}
-        <a href="/play/{{ q[4] }}" class="quiz-card-link">
+
+        <a href="/play/{{ quiz['id'] }}" class="quiz-card-link">
             <div class="quiz-card">
-                <img src="{{ url_for('quiz_img', path=q[0].split('quiz_img/')[-1]) }}"
+
+                <img src="{{ url_for('quiz_img', path=quiz['image_path'].split('quiz_img/')[-1]) }}"
                      alt="Quiz image"
                      class="quiz-card-image">
-                <div class="quiz-card-content">
-                    <h3 class="quiz-card-title">{{ q[1] }}</h3>
-                    <p class="quiz-card-description">{{ q[2] }}</p>
 
-                    {% if user["role"] == 'admin' or user["role"] == 'moderator' or user["id"] == q["user_id"] %}
+                <div class="quiz-card-content">
+
+                    <h3 class="quiz-card-title">{{ quiz["title"] }}</h3>
+                    <p class="quiz-card-description">{{ quiz["description"] }}</p>
+
+                    {% if user["role"] == 'admin'
+                          or user["role"] == 'moderator'
+                          or user["id"] == quiz["user_id"] %}
                     <div class="quiz-buttons-group">
-                        <button class="btn-promote" data-id="{{ q[4] }}">EDIT</button>
-                        <button class="btn-delete" data-id="{{ q[4] }}">DELETE</button>
+                        <button class="btn-promote" data-id="{{ quiz['id'] }}">EDIT</button>
+                        <button class="btn-delete" data-id="{{ quiz['id'] }}">DELETE</button>
                     </div>
                     {% endif %}
 
-                    <p class="quiz-card-author">Author: {{ q[3] }}</p>
+                    <p class="quiz-card-author">Author: {{ quiz["nickname"] }}</p>
                 </div>
             </div>
         </a>
-        {% else %}
-        <p class="no-quizzes">No quizzes have been created yet 😢</p>
-        {% endfor %}
+
     </div>
+
     <div class="quiz-stats-grid">
         <div class="quiz-stats-card">
             <div class="quiz-card-content">
                 <h3 class="quiz-stats-title">Quiz statistics</h3>
-                <p class="quiz-stats-description">Total played by everyone: {{stats[2]}}x</p>
-                <p class="quiz-stats-description">Average score: {{stats[0]}}%</p>
-                <p class="quiz-stats-description">Total played by you: {{stats[3]}}x</p>
-                <p class="quiz-stats-description">Your average score: {{stats[1]}}%</p>
+                <p class="quiz-stats-description">Total played by everyone: {{ stats[2] }}x</p>
+                <p class="quiz-stats-description">Average score: {{ stats[0] }}%</p>
+                <p class="quiz-stats-description">Total played by you: {{ stats[3] }}x</p>
+                <p class="quiz-stats-description">Your average score: {{ stats[1] }}%</p>
             </div>
         </div>
     </div>
 </div>
+
 <script src="{{ url_for('static', path='/js/quiz-card-buttons.js') }}"></script>
 {% endblock %}

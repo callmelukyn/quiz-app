@@ -1,5 +1,6 @@
 from fastapi import UploadFile
 from app.database.database import get_conn
+from app.services import system as system_svc
 import uuid
 
 def get_all_quizzes():
@@ -21,7 +22,7 @@ def get_all_quizzes():
 
 def get_quiz(id: int):
     with get_conn() as c:
-        rows = c.execute(
+        quiz = c.execute(
             """
             SELECT
                 q.image_path,
@@ -34,8 +35,8 @@ def get_quiz(id: int):
             JOIN users u ON q.user_id = u.id
             WHERE q.id = ?;
             """,(id,)
-        ).fetchall()
-        return rows
+        ).fetchone()
+        return quiz
 
 def get_quiz_full(quiz_id: int):
     with get_conn() as c:
@@ -87,13 +88,27 @@ def delete_quiz(quiz_id: int, current_user_id : int):
     with get_conn() as c:
         owner = c.execute("""
             SELECT COUNT(*) as count
-            FROM quizzes
-            WHERE id = ?
-                AND user_id = ?;
+            FROM quizzes q
+            WHERE q.id = ? AND q.user_id = ?
         """,(quiz_id,current_user_id)).fetchone()
-        if owner["count"] == 0:
-            return False
+
+        user_admin_or_mod = c.execute("""
+            SELECT COUNT(*) as count
+            FROM users
+            WHERE id = ? AND (role_id = 1 OR role_id = 2 )
+        """,(current_user_id,)).fetchone()
+
+        if owner["count"] == 0 and user_admin_or_mod["count"] == 0:
+            return False #Neni owner kvizu, ani admin, ani mod
         else:
+            file_path = c.execute(
+                """
+                SELECT image_path
+                FROM quizzes
+                WHERE id = ?
+                """,(quiz_id,)
+            ).fetchone() #prvne odstranim image z database directory a pak smazu instanci kvizu
+            system_svc.remove_file_from_db("app/" + file_path["image_path"])
             c.execute("""
                 DELETE FROM quizzes WHERE id = ?;
             """, (quiz_id,))

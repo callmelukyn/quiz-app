@@ -21,7 +21,6 @@ def init_db():
             nickname TEXT NOT NULL,
             password_hash BLOB NOT NULL,
             role_id INTEGER REFERENCES roles(id) NOT NULL DEFAULT 0,
-            is_active INTEGER NOT NULL DEFAULT 1,
             score INTEGER DEFAULT 0
         );
         """)

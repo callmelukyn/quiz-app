@@ -4,23 +4,23 @@
 <div class="quiz-section-container">
     <div class="quiz-card-grid">
         {% for q in quizzes %}
-        <a href="/quizzes/{{ q[4] }}" class="quiz-card-link">
+        <a href="/quizzes/{{ q["id"] }}" class="quiz-card-link">
             <div class="quiz-card">
-                <img src="{{ url_for('quiz_img', path=q[0].split('quiz_img/')[-1]) }}"
+                <img src="{{ url_for('quiz_img', path=q["image_path"].split('quiz_img/')[-1]) }}"
                      alt="Quiz image"
                      class="quiz-card-image">
                 <div class="quiz-card-content">
-                    <h3 class="quiz-card-title">{{ q[1] }}</h3>
-                    <p class="quiz-card-description">{{ q[2] }}</p>
+                    <h3 class="quiz-card-title">{{ q["title"] }}</h3>
+                    <p class="quiz-card-description">{{ q["description"] }}</p>
 
                     {% if user["role"] == 'admin' or user["role"] == 'moderator' or user["id"] == q["user_id"] %}
                     <div class="quiz-buttons-group">
-                        <button class="btn-promote" data-id="{{ q[4] }}">EDIT</button>
-                        <button class="btn-delete" data-id="{{ q[4] }}">DELETE</button>
+                        <button class="btn-promote" data-id="{{ q["id"] }}">EDIT</button>
+                        <button class="btn-delete" data-id="{{ q["id"] }}">DELETE</button>
                     </div>
                     {% endif %}
 
-                    <p class="quiz-card-author">Author: {{ q[3] }}</p>
+                    <p class="quiz-card-author">Author: {{ q["nickname"] }}</p>
                 </div>
             </div>
         </a>

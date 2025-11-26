@@ -4,4 +4,8 @@
 
 Predelat obrazky na blob
 
+Default obrazky se mazou pri smazani kvizu
+
+pokud pri editaci nenahraju obrazek, obrazek se zmeni na default nebo zadny
+
 
