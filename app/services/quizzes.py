@@ -108,7 +108,8 @@ def delete_quiz(quiz_id: int, current_user_id : int):
                 WHERE id = ?
                 """,(quiz_id,)
             ).fetchone() #prvne odstranim image z database directory a pak smazu instanci kvizu
-            system_svc.remove_file_from_db("app/" + file_path["image_path"])
+            if file_path["image_path"] != "database/quiz_img/default.png": #aby se mi nemazal default obrazek
+                system_svc.remove_file_from_db("app/" + file_path["image_path"])
             c.execute("""
                 DELETE FROM quizzes WHERE id = ?;
             """, (quiz_id,))
@@ -122,19 +123,23 @@ def update_quiz(quiz_id: int, payload: dict, image: UploadFile | None):
 
     with get_conn() as c:
         #update obecne info
-        if image:
+        if image and image.filename:
             image_path = save_image(image)
             c.execute("""
-                UPDATE quizzes
-                SET title = ?, description = ?, image_path = ?
-                WHERE id = ?;
-            """, (title, description, image_path, quiz_id))
+                      UPDATE quizzes
+                      SET title = ?,
+                          description = ?,
+                          image_path = ?
+                      WHERE id = ?;
+                      """, (title, description, image_path, quiz_id))
         else:
+            # Pokud není nový obrázek, aktualizujeme pouze texty (image_path zůstane původní)
             c.execute("""
-                UPDATE quizzes
-                SET title = ?, description = ?
-                WHERE id = ?;
-            """, (title, description, quiz_id))
+                      UPDATE quizzes
+                      SET title       = ?,
+                          description = ?
+                      WHERE id = ?;
+                      """, (title, description, quiz_id))
 
         #delete staré otázky + odpovědi
         c.execute("""
