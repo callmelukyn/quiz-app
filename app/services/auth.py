@@ -12,8 +12,8 @@ def register(email, nickname, hashed_password):
         c.commit()
 
 def register_check_availability(email, nickname):
+    errors = []
     with get_conn() as c:
-        errors = []
         email_row = c.execute(
             "SELECT email FROM users WHERE email = ?", (email,)
         ).fetchone()
@@ -29,18 +29,20 @@ def register_check_availability(email, nickname):
     return errors
 
 def login_check(email, password):
+    errors = []
     with get_conn() as c:
         user = c.execute(
             "SELECT * FROM users WHERE email = ?", (email,)
         ).fetchone()
 
         if not user:
-            return ["Email is not registered"]
+            errors.append("Email is not registered")
+            return errors
 
         if not bcrypt.checkpw(password.encode("utf-8"), user["password_hash"]):
-            return ["Incorrect password"]
+            errors.append("Incorrect password")
 
-    return []
+    return errors
 
 def hash_password(password):
     pw = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
@@ -60,6 +62,12 @@ def get_user_id_by_email(email):
 def get_and_insert_session(user_id: int):
     session_code = make_token()
     with get_conn() as c:
+        #smazu vsechny minule sessions, pokud tam nejake jsou
+        c.execute("""
+            DELETE FROM sessions WHERE user_id = ?
+        """,(user_id,))
+
+        #insertnu novou session pro usera
         c.execute("""
             INSERT INTO sessions (user_id, session_code) VALUES (?, ?)
         """, (user_id, session_code))

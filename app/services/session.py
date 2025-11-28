@@ -15,6 +15,11 @@ def get_current_user(request: Request):
             WHERE session_code = ?
         """, (session_code,)).fetchone() #podle sessionu si zjistim id usera a toho vratim
 
+        if user_id is None: #osetreni, kdyby mel user starou cookie. resp. byl v tabulce jako user ale s neplatkou cookie
+            response = RedirectResponse("/auth/login")
+            response.delete_cookie("session", path="/")
+            raise HTTPException(status_code=303, detail="Redirect", headers={"Location": "/auth/login"})
+
         user = c.execute(
             """
             SELECT users.id, users.nickname, roles.name as role, users.score
