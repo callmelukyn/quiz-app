@@ -6,7 +6,7 @@ def make_admin():
             """
             UPDATE users 
             SET role_id = ?
-            WHERE nickname = 'callmelukyn';
+            WHERE nickname = 'TestAdminProfile';
             """,(admin,)
         )
         c.commit()
