@@ -1,4 +1,7 @@
 
 /players/6983264597234 vrati ze neexistuje na html, to samé u všeho co bere int jako nějaky id
-
 to stejne s kazdou dalsi route xdd
+
+landing stranka stats fix
+
+zombie cookies fix

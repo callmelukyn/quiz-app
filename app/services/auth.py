@@ -44,7 +44,6 @@ def login_check(email, password):
 
 def hash_password(password):
     pw = bcrypt.hashpw(password.encode("utf-8"), bcrypt.gensalt())
-    print(pw)
     return pw
 
 
