@@ -44,5 +44,10 @@ def delete_user(user_id: int):
         for file_path in file_paths:
             system_svc.remove_file_from_db("app/" + file_path[i])
             i += 1
+
+        c.execute("""
+            DELETE FROM quizzes WHERE user_id = ?
+        """,(user_id,))
+
         c.execute("DELETE FROM users WHERE id = ?", (user_id,))
         c.commit()

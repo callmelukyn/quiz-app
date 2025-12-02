@@ -30,6 +30,10 @@ searchInput.addEventListener("input", async () => {
 function openUserPopup(user) {
     popup.classList.remove("hidden");
 
+    const errorEl = document.getElementById("scoreError");
+    errorEl.style.display = "none";
+    errorEl.innerText = "";
+
     document.getElementById("popupNickname").innerHTML = `
     <a href="/players/${user.id}" class="popup-link">
         ${user.nickname}</a><span>↗</span>`;
@@ -54,24 +58,72 @@ function openUserPopup(user) {
         roleBtn.className = "btn-demote";
     }
 
-    document.getElementById("deleteUserBtn").onclick = () => deleteUser(user.id);
+    document.getElementById("deleteUserBtn").onclick = () => {
+        const isConfirmed = confirm(`Are you sure you want to delete "${user.nickname}"?\n\nThis action can not be reverted! All of his quizzes will be removed aswell.`);
+
+        if (isConfirmed) {
+            deleteUser(user.id);
+        }
+    };
 }
 
 closeBtn.onclick = () => popup.classList.add("hidden");
 
 
 async function updateScore(id) {
-    const newScore = document.getElementById("newScore").value;
+    const scoreInput = document.getElementById("newScore");
+    const errorEl = document.getElementById("scoreError");
 
-    await fetch(`/admin/edit-points/${id}`, {
+    // 1. Reset chyb
+    errorEl.style.display = "none";
+    errorEl.innerText = "";
+
+    const val = scoreInput.value;
+
+    // --- VALIDACE FRONTEND ---
+
+    // Je to vůbec číslo?
+    if (val === "" || isNaN(Number(val))) {
+        errorEl.innerText = "❌ You have to enter a number!";
+        errorEl.style.display = "block";
+        return;
+    }
+
+    // Je to CELÉ číslo?
+    if (!Number.isInteger(Number(val))) {
+        errorEl.innerText = "❌ You have to enter a whole number!";
+        errorEl.style.display = "block";
+        return; // <--- Tady se to zastaví a nepošle nic na server
+    }
+
+    // Je to kladné číslo?
+    const newScore = parseInt(val);
+    if (newScore < 0) {
+        errorEl.innerText = "❌ Score has to be positive number!";
+        errorEl.style.display = "block";
+        return;
+    }
+
+    // --- ODESLÁNÍ NA BACKEND ---
+    const res = await fetch(`/admin/edit-points/${id}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ score: newScore })
     });
 
-    showNotify("✅ Updated!", "Score has been successfully updated.");
-    popup.classList.add("hidden");
+    // Kontrola chyby ze serveru
+    if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        const serverMsg = data.detail || "Server error.";
 
+        errorEl.innerText = `❌ ${serverMsg}`;
+        errorEl.style.display = "block";
+        return;
+    }
+
+    // Úspěch
+    showNotify("✅ Saved!", "Score has been successfully modified.");
+    popup.classList.add("hidden");
     searchInput.dispatchEvent(new Event('input'));
 }
 

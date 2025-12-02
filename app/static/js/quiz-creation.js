@@ -8,19 +8,21 @@ const dropArea = document.getElementById("dropArea");
 const imageInput = document.getElementById("imageInput");
 const previewImage = document.getElementById("previewImage");
 
-dropArea.addEventListener("click", () => imageInput.click());
-dropArea.addEventListener("dragover", e => {
-    e.preventDefault();
-    dropArea.classList.add("dragover");
-});
-dropArea.addEventListener("dragleave", () => dropArea.classList.remove("dragover"));
-dropArea.addEventListener("drop", e => {
-    e.preventDefault();
-    dropArea.classList.remove("dragover");
-    imageInput.files = e.dataTransfer.files;
-    showPreview();
-});
-imageInput.addEventListener("change", showPreview);
+if (dropArea) {
+    dropArea.addEventListener("click", () => imageInput.click());
+    dropArea.addEventListener("dragover", e => {
+        e.preventDefault();
+        dropArea.classList.add("dragover");
+    });
+    dropArea.addEventListener("dragleave", () => dropArea.classList.remove("dragover"));
+    dropArea.addEventListener("drop", e => {
+        e.preventDefault();
+        dropArea.classList.remove("dragover");
+        imageInput.files = e.dataTransfer.files;
+        showPreview();
+    });
+    imageInput.addEventListener("change", showPreview);
+}
 
 function showPreview() {
     const file = imageInput.files[0];
@@ -35,15 +37,17 @@ function showPreview() {
 }
 
 // ------------------------------
-// ADD QUESTION BLOCK
+// ADD / REMOVE QUESTION BLOCK
 // ------------------------------
 
 function addQuestion() {
     const container = document.getElementById("questions");
 
+    // Přidáno tlačítko <button class="btn-delete-question" ...>
     const qHTML = `
         <div class="question-card" data-index="${qIndex}">
-            <h3 class="question-title">Question ${qIndex + 1}</h3>
+            <button type="button" class="btn-delete-question" onclick="removeQuestion(this)" title="Remove Question">×</button>
+            <h3 class="question-title">Question ${countQuestions() + 1}</h3>
 
             <input type="text" class="input-field question-text" placeholder="Question text" required>
 
@@ -60,6 +64,32 @@ function addQuestion() {
 
     container.insertAdjacentHTML("beforeend", qHTML);
     qIndex++;
+}
+
+// Funkce pro smazání otázky
+function removeQuestion(btn) {
+    // Najdi nejbližšího rodiče s třídou .question-card a odstraň ho
+    const card = btn.closest(".question-card");
+    if (card) {
+        card.remove();
+        renumberQuestions();
+    }
+}
+
+// Pomocná funkce pro zjištění aktuálního počtu karet
+function countQuestions() {
+    return document.querySelectorAll(".question-card").length;
+}
+
+// Přečíslování nadpisů (Question 1, Question 2...) po smazání
+function renumberQuestions() {
+    const cards = document.querySelectorAll(".question-card");
+    cards.forEach((card, index) => {
+        const title = card.querySelector(".question-title");
+        if (title) {
+            title.innerText = `Question ${index + 1}`;
+        }
+    });
 }
 
 // ------------------------------
@@ -90,7 +120,10 @@ function submitQuiz() {
             return;
         }
 
-        const correct = q.querySelector(`input[name="correct_${q.dataset.index}"]:checked`);
+        // Používáme data-index pro spárování radio buttonů uvnitř konkrétní karty
+        const idx = q.dataset.index;
+        const correct = q.querySelector(`input[name="correct_${idx}"]:checked`);
+
         if (!correct) {
             alert("Each question must have exactly one correct answer.");
             return;
@@ -99,12 +132,12 @@ function submitQuiz() {
         const answers = [];
         let validAnswers = true;
 
-        q.querySelectorAll(".answer-text").forEach((a, idx) => {
+        q.querySelectorAll(".answer-text").forEach((a, idxVal) => {
             const val = a.value.trim();
             if (!val) validAnswers = false;
             answers.push({
                 text: val,
-                correct: correct.value == idx ? 1 : 0
+                correct: correct.value == idxVal ? 1 : 0
             });
         });
 

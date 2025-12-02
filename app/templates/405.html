@@ -2,9 +2,28 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>405</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/style.css') }}">
+    <link rel="icon" href="{{ url_for('static', path='/img/favicon.ico') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quizzer - Create, compete, enjoy</title>
 </head>
 <body>
+{% include "nav-bar.html" %}
 
+{% block content %}
+
+<div class="quiz-create-container">
+    <h2 class="create-title">Error 405, Method not Allowed</h2>
+    <div class="dashboard-buttons-wrapper">
+        <a href="/" style="text-decoration: none; color:#fff">
+        <div class="hero-btn" style="justify-self: center">
+            <p style="text-decoration: none">VISIT MAIN PAGE</p>
+        </div></a>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% include "footer.html" %}
 </body>
 </html>

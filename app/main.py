@@ -2,7 +2,6 @@ from fastapi import FastAPI, HTTPException, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from app.routers import landing, leaderboard, aboutus, auth, dashboard, quizzes, players, admin, play
-from app.routers.error_pages import register_error_pages
 
 app = FastAPI(title="Quizzer")
 
@@ -21,4 +20,15 @@ app.include_router(players.router, prefix="/players", tags=["players"])
 app.include_router(admin.router, prefix="/admin", tags=["admin"])
 app.include_router(play.router, prefix="/play", tags=["play"])
 
-register_error_pages(app, templates)
+# Error pages
+@app.exception_handler(404)
+def redirect_to_404_html(request: Request, _exc: HTTPException):
+    return templates.TemplateResponse("404.html", {"request": request}, status_code=404)
+
+@app.exception_handler(405)
+def redirect_to_405_html(request: Request, _exc: HTTPException):
+    return templates.TemplateResponse("405.html", {"request": request}, status_code=405)
+
+@app.exception_handler(500)
+def redirect_to_500_html(request: Request, _exc: HTTPException):
+    return templates.TemplateResponse("500.html", {"request": request}, status_code=500)

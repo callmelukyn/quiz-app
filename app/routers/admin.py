@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Request, Depends
+from fastapi import APIRouter, Request, Depends, HTTPException
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from starlette.responses import RedirectResponse
@@ -24,7 +24,18 @@ def search_users(q: str = ""):
 
 @router.post("/edit-points/{user_id}")
 def update_points(user_id: int, score: dict):
-    admin_svc.edit_points(user_id, int(score["score"]))
+    if "score" not in score:
+        raise HTTPException(status_code=400, detail="Score value is missing")
+    raw_val = score["score"]
+    try:
+        score_val = int(raw_val)
+    except (ValueError, TypeError):
+        raise HTTPException(status_code=400, detail="Entered score value is invalid")
+
+    if score_val < 0:
+        raise HTTPException(status_code=400, detail="Score cannot be negative")
+
+    admin_svc.edit_points(user_id, score_val)
     return {"status": "ok"}
 
 @router.post("/promote-user/{user_id}")

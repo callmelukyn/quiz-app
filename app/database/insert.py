@@ -1,14 +1,13 @@
 from app.database.init_db import get_conn
 
 def insert_test_users():
-
     users = [
-        ("bobice@example.com", "gigachad", "Heslo123", 0, 0),
-        ("random@ez.cz", "uniuquenick", "Heslo123", 0, 0),
-        ("ericcartman@example.com", "playerultimate67", "Heslo123", 0, 0),
-        ("kylebrowlovski@example.com", "ihatecartman", "Heslo123", 0, 0),
-        ("drakethegod@example.com", "godsplan89", "Heslo123", 0, 0),
-        ("eminemiloveyou@example.com", "eminemlover41", "Heslo123", 0, 0)
+        ("bobice@example.com", "gigachad", "$2b$12$4Ad2t7rFLWu/Lz3daoCZbOygH7KbKrl581gL92xW5uQoW7Gqg05PW", 0, 0),
+        ("random@ez.cz", "uniuquenick", "$2b$12$4Ad2t7rFLWu/Lz3daoCZbOygH7KbKrl581gL92xW5uQoW7Gqg05PW", 0, 0),
+        ("ericcartman@example.com", "playerultimate67", "$2b$12$4Ad2t7rFLWu/Lz3daoCZbOygH7KbKrl581gL92xW5uQoW7Gqg05PW", 0, 0),
+        ("kylebrowlovski@example.com", "ihatecartman", "$2b$12$4Ad2t7rFLWu/Lz3daoCZbOygH7KbKrl581gL92xW5uQoW7Gqg05PW", 0, 0),
+        ("drakethegod@example.com", "godsplan89", "$2b$12$4Ad2t7rFLWu/Lz3daoCZbOygH7KbKrl581gL92xW5uQoW7Gqg05PW", 0, 0),
+        ("eminemiloveyou@example.com", "eminemlover41", "$2b$12$4Ad2t7rFLWu/Lz3daoCZbOygH7KbKrl581gL92xW5uQoW7Gqg05PW", 0, 0)
     ]
 
     quizzes = [

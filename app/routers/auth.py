@@ -39,6 +39,8 @@ def register_form(request: Request):
 @router.post("/register")
 def register_form_post(request: Request, email: str = Form(...), name: str = Form(...), password: str = Form(...)):
     errors = auth.register_check_availability(email,name)
+    password_errors = auth.validate_password(password)
+    errors.extend(password_errors)
     if errors:
         return templates.TemplateResponse("register.html", {"request": request, "errors": errors, "data": (email, name)})
 

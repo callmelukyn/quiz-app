@@ -84,3 +84,18 @@ def remove_session(user_id: int):
 
 def make_token():
     return secrets.token_urlsafe(16)
+
+
+def validate_password(password):
+    errors = []
+
+    # 1. Kontrola délky (>= 8 znaků)
+    if len(password) < 8:
+        errors.append("Password has to be at least 8 characters.")
+
+    # 2. Kontrola počtu čísel (>= 2 čísla)
+    digit_count = sum(c.isdigit() for c in password)
+    if digit_count < 2:
+        errors.append("Password has to include atleast 2 digits.")
+
+    return errors
