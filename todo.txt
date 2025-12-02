@@ -1,2 +1,9 @@
 /players/6983264597234 vrati ze neexistuje na html, to samé u všeho co bere int jako nějaky id
 to stejne s kazdou dalsi route xdd
+Dodelat nejak 404 a 405
+
+Zaporne cisla u admin dashboardu
+
+Mobilni appka aby jela
+
+Mazani otazky v kvizu

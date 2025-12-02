@@ -49,7 +49,8 @@
     </div>
 
     {% block content %}
-        <p class="info">Hello  <b>{{ user.nickname }}</b>, choose what you want to do.  </p>
+        <!-- Musel jsem sem pridat umelou mezeru, protoze se text furt spojoval bez mezery -->
+        <p class="info">Hello ‎  <b>{{ user.nickname }}</b>, choose what you want to do.  </p>
     {% endblock content %}
 
     {% include "footer.html" %}

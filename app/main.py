@@ -1,7 +1,8 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from app.routers import landing, leaderboard, aboutus, auth, dashboard, quizzes, players, admin, play
+from app.routers.error_pages import register_error_pages
 
 app = FastAPI(title="Quizzer")
 
@@ -19,3 +20,5 @@ app.include_router(quizzes.router, prefix="/quizzes", tags=["quizzes"])
 app.include_router(players.router, prefix="/players", tags=["players"])
 app.include_router(admin.router, prefix="/admin", tags=["admin"])
 app.include_router(play.router, prefix="/play", tags=["play"])
+
+register_error_pages(app, templates)
