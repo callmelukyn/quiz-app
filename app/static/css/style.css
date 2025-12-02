@@ -893,12 +893,44 @@ button a{
 }
 
 .question-card {
+    position: relative;
     backdrop-filter: blur(15px);
     background: rgba(255, 255, 255, 0.25);
     border-radius: 25px;
     padding: 25px;
     margin-top: 25px;
     box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+}
+
+.btn-delete-question {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 30px;
+    height: 30px;
+
+    background: linear-gradient(17deg, #8e2828 23%, #c0392b 71%);
+    color: white;
+    border: none;
+    border-radius: 50%;
+
+    font-size: 18px;
+    line-height: 1;
+    font-weight: bold;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    z-index: 10;
+}
+
+.btn-delete-question:hover {
+    background: linear-gradient(17deg, #a93226 23%, #e74c3c 71%);
+    transform: scale(1.15);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
 .question-title {
@@ -1238,4 +1270,231 @@ button a{
     font-size: 28px;
     font-weight: 700;
     color: #333;
+}
+
+
+/* ============ GLOBAL MOBILE/TABLET FIX ============ */
+
+/* -------------------------------------- */
+/* TABLETS - do 900 px */
+/* -------------------------------------- */
+@media (max-width: 900px) {
+
+    body {
+        font-size: 17px;
+    }
+
+    /* NAV */
+    .nav {
+        padding: 15px 20px;
+        height: auto !important;
+    }
+
+    /* HERO */
+    .hero {
+        padding: 80px 30px;
+        height: auto;
+    }
+    .hero h1 {
+        font-size: 4rem;
+    }
+    .hero p {
+        font-size: 1.2rem;
+        max-width: 90%;
+    }
+
+    /* SPLIT */
+    .split-section {
+        flex-direction: column;
+        padding: 60px 40px;
+        text-align: center;
+    }
+
+    .split-text h2 {
+        font-size: 2.3rem;
+    }
+
+    /* GRIDY */
+    .quiz-card-grid,
+    .quiz-stats-grid,
+    .dashboard-buttons-wrapper,
+    .sponsors-grid {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .quiz-card-link {
+        flex: 1 1 90% !important;
+        max-width: 90% !important;
+    }
+}
+
+/* -------------------------------------- */
+/* MOBILE - do 600 px  */
+/* -------------------------------------- */
+@media (max-width: 600px) {
+
+    body {
+        font-size: 16px;
+        overflow-x: hidden;
+    }
+
+    /* ============ NAVBAR FIX ============ */
+    .nav {
+        flex-direction: column;
+        height: auto !important;
+        padding: 15px;
+        gap: 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    .nav-logo { margin-bottom: 5px; }
+
+    .nav-items {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .nav-user-panel {
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+
+    .nav-button, .nav-btn-logout {
+        width: 100%;
+        justify-content: center;
+        box-sizing: border-box;
+    }
+
+    .quiz-section-container {
+        display: block;
+        width: 100%;
+        padding: 20px 10px;
+        box-sizing: border-box;
+        margin: 1rem auto;
+    }
+
+    /* ============ GRID S KARTIČKAMI ============ */
+    .quiz-card-grid {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 25px;
+        padding: 0;
+        margin: 0;
+    }
+
+    .quiz-card-link {
+        width: 100% !important;
+        max-width: 100% !important;
+        flex: none;
+        display: block;
+    }
+
+    .quiz-card {
+        width: 100%;
+        height: auto;
+        min-height: auto;
+    }
+
+    .quiz-card-image {
+        height: 180px;
+        object-fit: cover;
+    }
+
+    .quiz-card-content {
+        padding: 15px;
+    }
+
+    .quiz-card-description {
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+    }
+
+    /* ============ DASHBOARD TLAČÍTKA ============ */
+    .dashboard-buttons-wrapper {
+        flex-direction: column;
+        width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
+    }
+
+    .dashboard-btn, .dashboard-btn-green, .dashboard-btn-gold, .dashboard-btn-red {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* ============ DETAIL KVÍZU (STATS) ============ */
+    .quiz-section-container-stats {
+        flex-direction: column;
+        padding: 20px 10px;
+        display: flex;
+    }
+
+    .quiz-stats-grid {
+        margin-top: 20px;
+        width: 100%;
+        padding: 0;
+    }
+
+    .quiz-stats-card {
+        width: 100%;
+        height: auto;
+        padding-bottom: 20px;
+    }
+
+    /* ============ OSTATNÍ FIXY ============ */
+    .hero {
+        margin-top: 200px;
+        padding: 60px 20px;
+        height: auto;
+    }
+    .hero h1 {
+        font-size: 2.8rem;
+        word-wrap: break-word;
+    }
+
+    .leaderboard-hero a{
+        font-size: 55px;
+    }
+
+    .leaderboard-hero h1{
+        font-size: 55px;
+    }
+
+    .leaderboard-hero {
+        margin-top: 170px;
+    }
+
+    .leaderboard-container {
+        width: 90%;
+        overflow-x: auto;
+        padding: 0 10px;
+    }
+
+    /* Formuláře */
+    .form-wrapper {
+        position: relative;
+        transform: none;
+        top: 0; left: 0;
+        padding: 40px 15px;
+        height: auto;
+    }
+    .form-container {
+        width: 100%;
+    }
+    .popup-content {
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto;
+    }
+    .popup-content .btn-group {
+        flex-direction: column;
+        gap: 10px;
+    }
 }
